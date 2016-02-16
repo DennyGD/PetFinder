@@ -10,20 +10,18 @@
 
     using PetFinder.Data.Models;
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
+        public AppDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 
-        public IDbSet<Joke> Jokes { get; set; }
+        // TODO add db tables
 
-        public IDbSet<JokeCategory> JokesCategories { get; set; }
-
-        public static ApplicationDbContext Create()
+        public static AppDbContext Create()
         {
-            return new ApplicationDbContext();
+            return new AppDbContext();
         }
 
         public override int SaveChanges()

@@ -53,7 +53,7 @@
   <ItemGroup>
     <Compile Include="DbRepository.cs" />
     <Compile Include="IDbRepository.cs" />
-    <Compile Include="Models\BaseModel{TKey}.cs" />
+    <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\IAuditInfo.cs" />
     <Compile Include="Models\IDeletableEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -61,11 +61,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <AdditionalFiles Include="..\..\stylecop.json">
-      <Link>stylecop.json</Link>
-    </AdditionalFiles>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -8,7 +8,7 @@
 
     using PetFinder.Data.Models;
 
-    public sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
+    public sealed class Configuration : DbMigrationsConfiguration<AppDbContext>
     {
         public Configuration()
         {
@@ -16,7 +16,7 @@
             this.AutomaticMigrationDataLossAllowed = false;
         }
 
-        protected override void Seed(ApplicationDbContext context)
+        protected override void Seed(AppDbContext context)
         {
             const string AdministratorUserName = "admin@admin.com";
             const string AdministratorPassword = AdministratorUserName;
