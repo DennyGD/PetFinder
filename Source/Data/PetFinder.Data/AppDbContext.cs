@@ -10,7 +10,7 @@
 
     using PetFinder.Data.Models;
 
-    public class AppDbContext : IdentityDbContext<ApplicationUser>
+    public class AppDbContext : IdentityDbContext<User>
     {
         public AppDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

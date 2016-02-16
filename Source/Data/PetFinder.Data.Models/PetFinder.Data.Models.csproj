@@ -59,7 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationUser.cs" />
+    <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +67,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\PetFinder.Common.Constants\PetFinder.Common.Constants.csproj">
+      <Project>{5f5f68de-4883-4f5c-a45c-9757b931bcb8}</Project>
+      <Name>PetFinder.Common.Constants</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PetFinder.Data.Common\PetFinder.Data.Common.csproj">
       <Project>{edfe3c57-ef5b-4636-9ecc-d0baca6b6379}</Project>
       <Name>PetFinder.Data.Common</Name>
