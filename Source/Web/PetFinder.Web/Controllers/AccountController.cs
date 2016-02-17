@@ -11,7 +11,7 @@
 
     using PetFinder.Data.Models;
     using PetFinder.Web.ViewModels.Account;
-
+    using System;
     [Authorize]
     public class AccountController : BaseController
     {
@@ -170,7 +170,7 @@
         {
             if (this.ModelState.IsValid)
             {
-                var user = new User { UserName = model.Email, Email = model.Email };
+                var user = new User { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, CreatedOn = DateTime.Now };
                 var result = await this.UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
