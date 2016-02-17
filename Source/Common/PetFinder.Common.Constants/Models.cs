@@ -26,5 +26,11 @@
         public const int PostCategoryNameMaxLength = 15;
 
         public const int PetNameMaxLength = 20;
+
+        public const int CommentContentMaxLength = 600;
+
+        public const string AdminRole = "Admin";
+
+        public const string SpecialRole = "Specialist";
     }
 }

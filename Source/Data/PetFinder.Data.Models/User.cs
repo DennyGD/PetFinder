@@ -24,6 +24,7 @@
             : base()
         {
             this.posts = new HashSet<Post>();
+            this.comments = new HashSet<Comment>();
         }
 
         [Required]

@@ -18,6 +18,15 @@
         }
 
         // TODO add db tables
+        public virtual IDbSet<Comment> Comments { get; set; }
+
+        public virtual IDbSet<Pet> Pets { get; set; }
+
+        public virtual IDbSet<Post> Posts { get; set; }
+
+        public virtual IDbSet<PostCategory> PostCategories { get; set; }
+
+        public virtual IDbSet<Region> Regions { get; set; }
 
         public static AppDbContext Create()
         {
@@ -28,6 +37,26 @@
         {
             this.ApplyAuditInfoRules();
             return base.SaveChanges();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //When a category is deleted all its articles are deleted as well.
+            //modelBuilder
+            //    .Entity<Article>()
+            //    .HasRequired(p => p.Category)
+            //    .WithMany(x => x.Articles)
+            //    .WillCascadeOnDelete(true);
+
+            //base.OnModelCreating(modelBuilder);
+
+            modelBuilder
+                .Entity<Post>()
+                .HasRequired(x => x.User)
+                .WithMany(x => x.Posts)
+                .WillCascadeOnDelete(false);
+
+            base.OnModelCreating(modelBuilder);
         }
 
         private void ApplyAuditInfoRules()

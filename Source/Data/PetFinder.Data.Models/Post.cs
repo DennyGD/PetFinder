@@ -7,10 +7,15 @@
     using System.ComponentModel.DataAnnotations;
 
     using PetFinder.Common.Constants;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
     public class Post : BaseModel<int>
     {
         private ICollection<Comment> comments;
+
+        public Post()
+        {
+            this.comments = new HashSet<Comment>();
+        }
 
         [Required]
         [MaxLength(Models.PostTitleMaxLength)]
@@ -42,6 +47,7 @@
         [Required]
         public string UserId { get; set; }
 
+        [ForeignKey("UserId")]
         public virtual User User { get; set; }
 
         public virtual ICollection<Comment> Comments

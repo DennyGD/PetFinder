@@ -18,25 +18,31 @@
 
         protected override void Seed(AppDbContext context)
         {
-            const string AdministratorUserName = "admin@admin.com";
-            const string AdministratorPassword = AdministratorUserName;
-
-            if (!context.Roles.Any())
+            // System.Data.Entity.Core.UpdateException
+            if (context.Users.Any())
             {
-                // Create admin role
-                var roleStore = new RoleStore<IdentityRole>(context);
-                var roleManager = new RoleManager<IdentityRole>(roleStore);
-                var role = new IdentityRole { Name = "Admin" };
-                roleManager.Create(role);
+                return;
+            }
 
-                // Create admin user
-                var userStore = new UserStore<User>(context);
-                var userManager = new UserManager<User>(userStore);
-                var user = new User { UserName = AdministratorUserName, Email = AdministratorUserName };
-                userManager.Create(user, AdministratorPassword);
+            var dataSeed = new DataSeed(context);
+            try
+            {
+                dataSeed.SeedRoles();
+                dataSeed.SeedAdmin();
+                dataSeed.SeedUsers();
+                dataSeed.SeedRegions();
+                dataSeed.SeedPostCategories();
+                dataSeed.SeedPets();
+                dataSeed.SeedPostsWithComments(
+                    context.Users.ToList(), 
+                    context.PostCategories.ToList(), 
+                    context.Pets.ToList(),
+                    context.Regions.ToList());
+            }
+            catch (System.Data.Entity.Core.UpdateException ex)
+            {
 
-                // Assign user to admin role
-                userManager.AddToRole(user.Id, "Admin");
+                throw;
             }
         }
     }
