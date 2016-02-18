@@ -203,6 +203,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="App_Start\GlimpseSecurityPolicy.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -226,6 +227,7 @@
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\Posts\PostBaseViewModel.cs" />
+    <Compile Include="ViewModels\Statistics\StatsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -291,6 +293,7 @@
     <Content Include="Views\Shared\DisplayTemplates\PostBaseViewModel.cshtml" />
     <Content Include="Views\Shared\_PostBaseListPartial.cshtml" />
     <Content Include="Views\Shared\_PostBasePartial.cshtml" />
+    <Content Include="Views\Statistics\_StatsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -27,7 +27,7 @@
         public ActionResult LastLostPosts()
         {
             var data = this.postsService
-                .GetLastByCategory("Изгубени")
+                .LastByCategory("Изгубени")
                 .To<PostBaseViewModel>()
                 .ToList();
 
@@ -39,7 +39,7 @@
         public ActionResult LastFoundPets()
         {
             var data = this.postsService
-                .GetLastByCategory("Намерени")
+                .LastByCategory("Намерени")
                 .To<PostBaseViewModel>()
                 .ToList();
 
