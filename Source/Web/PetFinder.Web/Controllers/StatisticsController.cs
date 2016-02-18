@@ -18,6 +18,7 @@
         }
 
         [HttpGet]
+        [ChildActionOnly]
         public ActionResult BasicStats()
         {
             var lostPetsCount = this.Cache
