@@ -12,9 +12,19 @@
     using Kendo.Mvc.UI;
     using PetFinder.Data.Models;
     using PetFinder.Data;
-
-    public class UsersController : Controller
+    using Services.Data.Contracts;
+    using Infrastructure.Mapping;
+    using ViewModels;
+    using Web.Controllers;
+    public class UsersController : BaseController
     {
+        private readonly IUsersService usersService;
+
+        public UsersController(IUsersService usersService)
+        {
+            this.usersService = usersService;
+        }
+
         private AppDbContext db = new AppDbContext();
 
         public ActionResult Index()
@@ -24,46 +34,25 @@
 
         public ActionResult Users_Read([DataSourceRequest]DataSourceRequest request)
         {
-            IQueryable<User> users = db.Users;
-            DataSourceResult result = users.ToDataSourceResult(request, user => new {
-                Id = user.Id,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                CreatedOn = user.CreatedOn,
-                ModifiedOn = user.ModifiedOn,
-                DeletedOn = user.DeletedOn,
-                IsDeleted = user.IsDeleted,
-                Email = user.Email,
-                UserName = user.UserName
-            });
+            var result = this.usersService
+                .All(true)
+                .To<UserAdminViewModel>()
+                .ToDataSourceResult(request);
 
             return Json(result);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Users_Update([DataSourceRequest]DataSourceRequest request, User user)
+        public ActionResult Users_Update([DataSourceRequest]DataSourceRequest request, UserAdminUpdateModel user)
         {
             if (ModelState.IsValid)
             {
-                var entity = new User
-                {
-                    Id = user.Id,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    CreatedOn = user.CreatedOn,
-                    ModifiedOn = user.ModifiedOn,
-                    DeletedOn = user.DeletedOn,
-                    IsDeleted = user.IsDeleted,
-                    Email = user.Email,
-                    UserName = user.UserName
-                };
-
-                db.Users.Attach(entity);
-                db.Entry(entity).State = EntityState.Modified;
-                db.SaveChanges();
+                this.usersService.Update(user.Email, user.FirstName, user.LastName, user.Id);
             }
 
-            return Json(new[] { user }.ToDataSourceResult(request, ModelState));
+            var userById = this.usersService.ById(user.Id);
+            var data = this.Mapper.Map<UserAdminViewModel>(userById);
+            return Json(new[] { data }.ToDataSourceResult(request, ModelState));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]

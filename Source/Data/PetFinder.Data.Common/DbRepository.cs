@@ -8,7 +8,7 @@
 
     // TODO: Why BaseModel<int> instead BaseModel<TKey>?
     public class DbRepository<T> : IDbRepository<T>
-        where T : class, IDeletableEntity
+        where T : class, IDeletableEntity, IAuditInfo
     {
         public DbRepository(DbContext context)
         {

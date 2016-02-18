@@ -10,7 +10,7 @@
     //}
 
     public interface IDbRepository<T>
-        where T : class, IDeletableEntity
+        where T : class, IDeletableEntity, IAuditInfo
     {
         IQueryable<T> All();
 

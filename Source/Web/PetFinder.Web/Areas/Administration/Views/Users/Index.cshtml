@@ -8,7 +8,7 @@
     @Scripts.Render("~/bundles/kendo")
 }
 
-@(Html.Kendo().Grid<PetFinder.Data.Models.User>()
+@(Html.Kendo().Grid<PetFinder.Web.Areas.Administration.ViewModels.UserAdminViewModel>()
       .Name("grid")
       .Columns(columns =>
       {
