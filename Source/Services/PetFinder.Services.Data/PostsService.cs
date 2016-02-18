@@ -25,8 +25,8 @@
 
             return this.postsRepo
                 .All()
-                .Where(x => x.PostCategory.Name.ToLower() == category.ToLower())
-                .OrderBy(x => x.CreatedOn)
+                .Where(x => (x.PostCategory.Name.ToLower() == category.ToLower()) && !x.IsSolved)
+                .OrderByDescending(x => x.CreatedOn)
                 .Take(count);
         }
     }

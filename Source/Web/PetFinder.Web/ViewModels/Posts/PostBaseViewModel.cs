@@ -15,6 +15,11 @@
 
         public string Content { get; set; }
 
+        public string UrlTitle
+        {
+            get { return this.Title.Replace(' ', '-'); }
+        }
+
         public void CreateMappings(IMapperConfiguration configuration)
         {
             configuration.CreateMap<Post, PostBaseViewModel>()

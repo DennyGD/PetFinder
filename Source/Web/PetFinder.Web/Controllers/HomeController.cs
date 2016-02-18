@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Web.Mvc;
     using ViewModels.Posts;
+
     public class HomeController : BaseController
     {
         private readonly IPostsService postsService;
@@ -22,6 +23,7 @@
 
         // TODO refactor
         [ChildActionOnly]
+        //[OutputCache(Duration = 2 * 60)]
         public ActionResult LastLostPosts()
         {
             var data = this.postsService
@@ -33,6 +35,7 @@
         }
 
         [ChildActionOnly]
+        //[OutputCache(Duration = 2 * 60)]
         public ActionResult LastFoundPets()
         {
             var data = this.postsService
