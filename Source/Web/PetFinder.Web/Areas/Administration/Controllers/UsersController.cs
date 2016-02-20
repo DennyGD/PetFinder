@@ -7,9 +7,8 @@
     using Kendo.Mvc.UI;
     using Services.Data.Contracts;
     using ViewModels;
-    using Web.Controllers;
 
-    public class UsersController : BaseController
+    public class UsersController : BaseAdminController
     {
         private readonly IUsersService usersService;
 
