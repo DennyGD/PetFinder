@@ -19,8 +19,8 @@
         columns.Bound(c => c.LastName);
         columns.Bound(c => c.CreatedOn);
         columns.Bound(c => c.ModifiedOn);
-        columns.Bound(c => c.DeletedOn);
-        columns.Bound(c => c.IsDeleted).Width(80);
+        columns.Bound(c => c.DeletedOn).Width(90);
+        columns.Bound(c => c.IsDeleted).Width(110);
         columns.Bound(c => c.Email);
         columns.Bound(c => c.UserName).Hidden();
         columns.Command(command => { command.Edit(); }).Width(80);
