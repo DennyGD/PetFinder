@@ -204,7 +204,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\Administration\Controllers\UsersController.cs" />
-    <Compile Include="Areas\Administration\ViewModels\UserAdminUpdateModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\UserAdminViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -331,6 +330,7 @@
     <Content Include="Content\KendoUi\fonts\glyphs\KendoUIGlyphs.ttf" />
     <Content Include="Content\KendoUi\fonts\glyphs\KendoUIGlyphs.woff" />
     <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\EditorTemplates\UserAdminViewModel.cshtml" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.0.js" />
     <Content Include="Scripts\jquery-2.2.0.min.js" />
@@ -382,7 +382,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Administration\Views\Shared\" />
     <Folder Include="ViewModels\Home\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Users\" />

@@ -8,8 +8,8 @@
     {
         IQueryable<User> All(bool includeDeleted);
 
-        User ById(string id);
+        User ById(string id, bool includeDeleted);
 
-        void Update(string email, string firstName, string lastName, string id);
+        bool Update(string email, string firstName, string lastName, bool isDeleted, string id);
     }
 }

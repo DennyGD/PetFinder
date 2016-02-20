@@ -30,6 +30,14 @@
         </div>
     </div>
     <div class="container body-content">
+        @if (TempData[Others.TempDataForSuccess] != null)
+        {
+            <h4 class="text-success">@TempData[Others.TempDataForSuccess]</h4>
+        }
+        @if (TempData[Others.TempDataForError] != null)
+        {
+            <h4 class="text-warning">@TempData[Others.TempDataForError]</h4>
+        }
         @RenderBody()
         <hr />
         <footer>
