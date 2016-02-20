@@ -73,6 +73,10 @@
       <Project>{5f5f68de-4883-4f5c-a45c-9757b931bcb8}</Project>
       <Name>PetFinder.Common.Constants</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Common\PetFinder.Common.Helpers\PetFinder.Common.Helpers.csproj">
+      <Project>{83741bfa-6fc4-4a3f-bef1-b187fa8b02da}</Project>
+      <Name>PetFinder.Common.Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PetFinder.Data.Common\PetFinder.Data.Common.csproj">
       <Project>{edfe3c57-ef5b-4636-9ecc-d0baca6b6379}</Project>
       <Name>PetFinder.Data.Common</Name>

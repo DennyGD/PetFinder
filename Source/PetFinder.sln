@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{DB1B2E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetFinder.Common.Constants", "Common\PetFinder.Common.Constants\PetFinder.Common.Constants.csproj", "{5F5F68DE-4883-4F5C-A45C-9757B931BCB8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetFinder.Common.Helpers", "Common\PetFinder.Common.Helpers\PetFinder.Common.Helpers.csproj", "{83741BFA-6FC4-4A3F-BEF1-B187FA8B02DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{5F5F68DE-4883-4F5C-A45C-9757B931BCB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F5F68DE-4883-4F5C-A45C-9757B931BCB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F5F68DE-4883-4F5C-A45C-9757B931BCB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83741BFA-6FC4-4A3F-BEF1-B187FA8B02DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83741BFA-6FC4-4A3F-BEF1-B187FA8B02DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83741BFA-6FC4-4A3F-BEF1-B187FA8B02DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83741BFA-6FC4-4A3F-BEF1-B187FA8B02DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,5 +84,6 @@ Global
 		{90FE4C4D-122A-406D-8A40-79C561FB8184} = {A5398FDD-2BE7-452F-9808-E5D3C5B58CC3}
 		{DEAB17A2-58C1-448C-8A66-D49C3AF7FC6C} = {A5398FDD-2BE7-452F-9808-E5D3C5B58CC3}
 		{5F5F68DE-4883-4F5C-A45C-9757B931BCB8} = {DB1B2EFA-018D-4EC6-8D0C-D78D40D7EC17}
+		{83741BFA-6FC4-4A3F-BEF1-B187FA8B02DA} = {DB1B2EFA-018D-4EC6-8D0C-D78D40D7EC17}
 	EndGlobalSection
 EndGlobal

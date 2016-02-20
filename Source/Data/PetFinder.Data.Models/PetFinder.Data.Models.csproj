@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Comment.cs" />
+    <Compile Include="Image.cs" />
     <Compile Include="Pet.cs" />
     <Compile Include="Post.cs" />
     <Compile Include="PostCategory.cs" />

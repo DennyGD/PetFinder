@@ -9,14 +9,19 @@
     using System.Threading.Tasks;
 
     using PetFinder.Common.Constants;
+    using PetFinder.Common.Helpers;
     using Models;
     using System.Data.Entity;
     using System.Data.Entity.Validation;
+    using System.IO;
+    using System.Reflection;
     public class DataSeed
     {
         private const string DefaultPassword = "123456";
 
         private const string DefaultUserName = "someUser";
+
+        private const string DefaultImageFileExtension = "jpg";
 
         private IList<string> regions = new List<string>()
         {   "Благоевград",
@@ -186,6 +191,50 @@
             this.context.SaveChanges();
             
             //SaveChanges(this.context);
+        }
+
+        public void SeedImages(List<Post> posts)
+        {
+            var images = this.GetImages();
+
+            var imagesCount = images.Count;
+
+            foreach (var post in posts)
+            {
+                var image = images[rand.Next(0, imagesCount)];
+                this.context.Images.Add(image);
+                post.Images.Add(image);
+            }
+
+            this.context.SaveChanges();
+        }
+
+        private IList<Image> GetImages()
+        {
+            var images = new List<Image>();
+            
+            var assemblyDirectory = AssemblyHelper.GetDirectoryForAssembyl(Assembly.GetCallingAssembly());
+            var lastBinIndex = assemblyDirectory.LastIndexOf("bin");
+            var editedAssemblyDirectory = assemblyDirectory.Substring(0, assemblyDirectory.Length - (assemblyDirectory.Length - lastBinIndex));
+            var imagesDirectory = $"{editedAssemblyDirectory}App_Data/TestImages";
+
+            var catPath = imagesDirectory + "/first-cat." + DefaultImageFileExtension;
+            images.Add(this.GetImage(catPath));
+
+            var firstDogPath = $"{imagesDirectory}/first-dog.{DefaultImageFileExtension}";
+            images.Add(this.GetImage(firstDogPath));
+
+            var secondDogPath = $"{imagesDirectory}/second-dog.{DefaultImageFileExtension}";
+            images.Add(this.GetImage(secondDogPath));
+
+            return images;
+        }
+
+        private Image GetImage(string path)
+        {
+            var file = File.ReadAllBytes(path);
+            var image = new Image() { Content = file, CreatedOn = DateTime.Now, FileExtension = DefaultImageFileExtension };
+            return image;
         }
 
         // ! Error Finder only! Suitable when database is updated from console.

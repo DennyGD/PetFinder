@@ -7,7 +7,7 @@
     using Microsoft.AspNet.Identity.EntityFramework;
 
     using PetFinder.Data.Models;
-
+    using System;
     public sealed class Configuration : DbMigrationsConfiguration<AppDbContext>
     {
         public Configuration()
@@ -38,6 +38,7 @@
                     context.PostCategories.ToList(), 
                     context.Pets.ToList(),
                     context.Regions.ToList());
+                dataSeed.SeedImages(context.Posts.ToList());
             }
             catch (System.Data.Entity.Core.UpdateException ex)
             {

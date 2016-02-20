@@ -5,16 +5,20 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using PetFinder.Common.Constants;
-    using System.ComponentModel.DataAnnotations.Schema;
+    
     public class Post : BaseModel<int>
     {
         private ICollection<Comment> comments;
 
+        private ICollection<Image> images;
+
         public Post()
         {
             this.comments = new HashSet<Comment>();
+            this.images = new HashSet<Image>();
         }
 
         [Required]
@@ -54,6 +58,12 @@
         {
             get { return this.comments; }
             set { this.comments = value; }
+        }
+
+        public virtual ICollection<Image> Images
+        {
+            get { return this.images; }
+            set { this.images = value; }
         }
     }
 }

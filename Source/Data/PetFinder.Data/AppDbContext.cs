@@ -20,6 +20,8 @@
         // TODO add db tables
         public virtual IDbSet<Comment> Comments { get; set; }
 
+        public virtual IDbSet<Image> Images { get; set; }
+
         public virtual IDbSet<Pet> Pets { get; set; }
 
         public virtual IDbSet<Post> Posts { get; set; }
