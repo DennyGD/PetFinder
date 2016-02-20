@@ -1,0 +1,42 @@
+﻿@using Kendo.Mvc.UI;
+
+@section stylesInHead {
+    @Styles.Render("~/Content/kendo")    
+}
+
+@section scriptsInHead {
+    @Scripts.Render("~/bundles/kendo")
+}
+
+<h1 class="text-primary">Admin panel for the users</h1>
+<br />
+
+@(Html.Kendo().Grid<PetFinder.Web.Areas.Administration.ViewModels.UserAdminViewModel>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+        columns.Bound(c => c.FirstName);
+        columns.Bound(c => c.LastName);
+        columns.Bound(c => c.CreatedOn);
+        columns.Bound(c => c.ModifiedOn);
+        columns.Bound(c => c.DeletedOn).Width(90);
+        columns.Bound(c => c.IsDeleted).Width(110);
+        columns.Bound(c => c.Email);
+        columns.Bound(c => c.UserName).Hidden();
+        columns.Command(command => { command.Edit(); }).Width(80);
+      })
+      .ColumnMenu()
+      .Editable(editable => editable.Mode(GridEditMode.PopUp))
+      .Pageable()
+      .Sortable(sortable => {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Filterable()
+      .Scrollable(x => x.Height("auto"))
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model => model.Id(p => p.Id))
+          .Read(read => read.Action("Users_Read", "Users"))
+          .Update(update => update.Action("Users_Update", "Users"))
+      )
+)

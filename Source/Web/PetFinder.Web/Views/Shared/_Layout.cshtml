@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - PetFinder</title>
     @Styles.Render("~/Content/css")
+    @RenderSection("stylesInHead", required: false)
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scriptsInHead", required: false)
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -26,6 +30,14 @@
         </div>
     </div>
     <div class="container body-content">
+        @if (TempData[Others.TempDataForSuccess] != null)
+        {
+            <h4 class="text-success">@TempData[Others.TempDataForSuccess]</h4>
+        }
+        @if (TempData[Others.TempDataForError] != null)
+        {
+            <h4 class="text-warning">@TempData[Others.TempDataForError]</h4>
+        }
         @RenderBody()
         <hr />
         <footer>
@@ -33,7 +45,6 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
