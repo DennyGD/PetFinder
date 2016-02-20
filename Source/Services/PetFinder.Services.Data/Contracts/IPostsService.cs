@@ -9,5 +9,7 @@
         IQueryable<Post> LastByCategory(string category, int count = 5);
 
         IQueryable<Post> All(bool isSolved, string category = "");
+
+        Post ById(int id);
     }
 }

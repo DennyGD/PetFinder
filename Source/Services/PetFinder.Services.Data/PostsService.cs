@@ -48,5 +48,10 @@
                 .Where(query)
                 .OrderByDescending(x => x.CreatedOn);
         }
+
+        public Post ById(int id)
+        {
+            return this.postsRepo.GetById(id);
+        }
     }
 }
