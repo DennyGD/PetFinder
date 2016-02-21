@@ -5,6 +5,7 @@
     using System.Linq.Expressions;
 
     using Contracts;
+    using PetFinder.Common.Constants;
     using PetFinder.Data.Common;
     using PetFinder.Data.Models;
 
@@ -49,9 +50,37 @@
                 .OrderByDescending(x => x.CreatedOn);
         }
 
+        public IQueryable<Post> All(int page, int pageSize, string region)
+        {
+            if (region == null || region == Others.AllRegions)
+            {
+                region = string.Empty;
+            }
+
+            var skip = (page - 1) * pageSize;
+
+            return this.postsRepo
+                .All()
+                .Where(x => x.Region.Name.Contains(region))
+                .OrderByDescending(x => x.CreatedOn)
+                .ThenBy(x => x.Id)
+                .Skip(skip)
+                .Take(pageSize);
+        }
+
         public Post ById(int id)
         {
             return this.postsRepo.GetById(id);
+        }
+
+        public int AllPostsCount(string region)
+        {
+            if (region == null || region == Others.AllRegions)
+            {
+                region = string.Empty;
+            }
+
+            return this.postsRepo.All().Where(x => x.Region.Name.Contains(region)).Count();
         }
     }
 }

@@ -62,12 +62,18 @@
     <Compile Include="CommentsService.cs" />
     <Compile Include="Contracts\ICommentsService.cs" />
     <Compile Include="Contracts\IPostsService.cs" />
+    <Compile Include="Contracts\IRegionsService.cs" />
     <Compile Include="Contracts\IUsersService.cs" />
     <Compile Include="PostsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegionsService.cs" />
     <Compile Include="UsersService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\PetFinder.Common.Constants\PetFinder.Common.Constants.csproj">
+      <Project>{5f5f68de-4883-4f5c-a45c-9757b931bcb8}</Project>
+      <Name>PetFinder.Common.Constants</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Data\PetFinder.Data.Common\PetFinder.Data.Common.csproj">
       <Project>{edfe3c57-ef5b-4636-9ecc-d0baca6b6379}</Project>
       <Name>PetFinder.Data.Common</Name>

@@ -20,7 +20,7 @@
 
         public int CommentsCount { get; set; }
 
-        //public IList<CommentViewModel> Comments { get; set; }
+        public bool IsSolved { get; set; }
 
         public void CreateMappings(IMapperConfiguration configuration)
         {
@@ -33,6 +33,7 @@
                 .ForMember(
                 x => x.CommentsCount,
                 opts => opts.MapFrom(x => x.Comments.Count));
+
         }
     }
 }
