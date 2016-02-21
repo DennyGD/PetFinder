@@ -11,9 +11,10 @@
     using Infrastructure.Mapping;
     using PetFinder.Common.Constants;
     using ViewModels.Shared;
+
     public class PostsController : BaseController
     {
-        private const int DefaultPageSize = 2;
+        private const int DefaultPageSize = 5;
 
         private readonly IPostsService postsService;
 
