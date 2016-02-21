@@ -1,5 +1,13 @@
 ﻿@model PetFinder.Web.ViewModels.Posts.PostExtendedViewModel
 
+@if (Model.IsSolved)
+{
+    <div class="alert alert-success">Случаят е разрешен.</div>
+}
+else
+{
+    <div class="alert alert-danger"> Случаят все още не е разрешен.</div>
+}
 <h2 class="text-center text-primary">@Model.Title</h2>
 <div class="row">
     <div class="col-md-8">
