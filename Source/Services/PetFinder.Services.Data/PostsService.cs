@@ -49,9 +49,26 @@
                 .OrderByDescending(x => x.CreatedOn);
         }
 
+        public IQueryable<Post> All(int page, int pageSize)
+        {
+            var skip = (page - 1) * pageSize;
+
+            return this.postsRepo
+                .All()
+                .OrderByDescending(x => x.CreatedOn)
+                .ThenBy(x => x.Id)
+                .Skip(skip)
+                .Take(pageSize);
+        }
+
         public Post ById(int id)
         {
             return this.postsRepo.GetById(id);
+        }
+
+        public int AllPostsCount()
+        {
+            return this.postsRepo.All().Count();
         }
     }
 }

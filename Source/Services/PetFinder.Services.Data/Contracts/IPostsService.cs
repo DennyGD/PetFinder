@@ -10,6 +10,10 @@
 
         IQueryable<Post> All(bool isSolved, string category = "");
 
+        IQueryable<Post> All(int page, int pageSize);
+
         Post ById(int id);
+
+        int AllPostsCount();
     }
 }

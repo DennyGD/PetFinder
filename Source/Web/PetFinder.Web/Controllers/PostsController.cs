@@ -1,5 +1,6 @@
 ﻿namespace PetFinder.Web.Controllers
 {
+    using System;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -20,6 +21,25 @@
         {
             this.postsService = postsService;
             this.commentsService = commentsService;
+        }
+
+        [HttpGet]
+        public ActionResult All(int id = 1)
+        {
+            var posts = this.postsService
+                .All(id, 2)
+                .To<PostBaseViewModel>()
+                .ToList();
+
+            var totalPages = (int)Math.Ceiling(this.postsService.AllPostsCount() / (decimal)2);
+            var data = new AllPageViewModel()
+            {
+                CurrentPage = id,
+                TotalPages = totalPages,
+                Posts = posts
+            };
+
+            return this.View(data);
         }
 
         [HttpGet]
