@@ -44,6 +44,7 @@
                 MainInfo = postMainInfo,
                 Comments = postComments
             };
+            this.ViewBag.PostId = postMainInfo.Id;
 
             return this.View(data);
         }

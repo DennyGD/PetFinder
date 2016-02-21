@@ -1,15 +1,19 @@
 ﻿@model PetFinder.Web.ViewModels.Comments.CommentInputModel
 
+@{
+    Model.PostId = ViewBag.PostId;
+}
+
 @using (Ajax.BeginForm("Add", "Comments", new AjaxOptions()
 {
     HttpMethod = "Post",
     UpdateTargetId = "comments",
-    InsertionMode = InsertionMode.InsertAfter,
+    InsertionMode = InsertionMode.InsertBefore,
     OnFailure = "commentAdditionFail"
 }))
 {
     @Html.AntiForgeryToken();
-
+    @Html.HiddenFor(m => m.PostId)
     @Html.TextAreaFor(m => m.Content, 5, 40, null)
     @Html.ValidationMessageFor(m => m.Content, string.Empty, new { @class = "text-danger" })
     <br />

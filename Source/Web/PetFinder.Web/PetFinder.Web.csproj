@@ -309,6 +309,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Libraries\Kendo\Kendo.Mvc.dll" />
     <Content Include="Libraries\Kendo\Kendo.Mvc.xml" />
+    <Content Include="Scripts\app\comments\comment-add.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -396,6 +397,7 @@
     <Content Include="Views\Shared\_CommentAdditionPartial.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\CommentViewModel.cshtml" />
     <Content Include="Views\Shared\_CommentsListPartial.cshtml" />
+    <Content Include="Views\Shared\_SingleCommentPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\Home\" />

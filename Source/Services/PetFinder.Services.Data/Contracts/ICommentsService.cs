@@ -7,5 +7,7 @@
     public interface ICommentsService
     {
         IQueryable<Comment> AllByPostId(int postId, int? takeSize);
+
+        Comment Add(string content, int postId, string userId);
     }
 }

@@ -2,7 +2,18 @@
 
 @Html.DisplayFor(m => m.MainInfo)
 
-@Html.Partial("_CommentAdditionPartial", new PetFinder.Web.ViewModels.Comments.CommentInputModel() { PostId = Model.MainInfo.Id })
+<br />
+<div class="row">
+    <div class="col-md-offset-2 col-md-6">
+        <h4 class="text-danger" id="addition-fail"></h4>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-offset-2 col-md-6">
+        @Html.Partial("_CommentAdditionPartial", new PetFinder.Web.ViewModels.Comments.CommentInputModel())
+    </div>
+</div>
 
 <br />
 <div id="comments-list">
@@ -24,5 +35,7 @@
 </div>
 
 @section scripts {
-    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>   
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/app/comments/comment-add.js"></script>
 }
