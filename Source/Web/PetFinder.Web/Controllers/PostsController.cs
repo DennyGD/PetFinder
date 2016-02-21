@@ -1,18 +1,25 @@
 ﻿namespace PetFinder.Web.Controllers
 {
+    using System.Linq;
     using System.Web.Mvc;
 
     using Services.Data.Contracts;
     using ViewModels.Posts;
+    using ViewModels.Comments;
+    using Infrastructure.Mapping;
+    using PetFinder.Common.Constants;
 
     public class PostsController : BaseController
     {
         private readonly IPostsService postsService;
 
-        public PostsController(IPostsService postsService)
+        private readonly ICommentsService commentsService;
+
+        public PostsController(IPostsService postsService, ICommentsService commentsService)
             : base()
         {
             this.postsService = postsService;
+            this.commentsService = commentsService;
         }
 
         [HttpGet]
@@ -26,7 +33,17 @@
                 return this.RedirectToAction("Index", "Home");
             }
 
-            var data = this.Mapper.Map<PostExtendedViewModel>(postById);
+            var postMainInfo = this.Mapper.Map<PostExtendedViewModel>(postById);
+            var postComments = this.commentsService
+                .AllByPostId(id, Others.DefaultTakeSizeForComments)
+                .To<CommentViewModel>()
+                .ToList();
+
+            var data = new DetailsPageViewModel()
+            {
+                MainInfo = postMainInfo,
+                Comments = postComments
+            };
 
             return this.View(data);
         }

@@ -1,3 +1,28 @@
-﻿@model PetFinder.Web.ViewModels.Posts.PostExtendedViewModel
+﻿@model PetFinder.Web.ViewModels.Posts.DetailsPageViewModel
 
-@Html.DisplayForModel()
+@Html.DisplayFor(m => m.MainInfo)
+
+@Html.Partial("_CommentAdditionPartial", new PetFinder.Web.ViewModels.Comments.CommentInputModel() { PostId = Model.MainInfo.Id })
+
+<br />
+<div id="comments-list">
+    @Html.Partial("_CommentsListPartial", Model.Comments)
+
+    @if (Model.MainInfo.CommentsCount > Model.Comments.Count)
+    {
+        <div class="row">
+            <div class="col-md-offset-2 col-md-6">
+                @Ajax.ActionLink(
+                "Покажи всички",
+                "AllCommentsForPost",
+                "Comments",
+                new { id = Model.MainInfo.Id },
+                new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "comments-list", InsertionMode = InsertionMode.Replace })
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>   
+}

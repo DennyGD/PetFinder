@@ -208,6 +208,7 @@
     <Compile Include="Areas\Administration\ViewModels\UserAdminViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="App_Start\GlimpseSecurityPolicy.cs" />
@@ -225,6 +226,8 @@
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
+    <Compile Include="ViewModels\Comments\CommentInputModel.cs" />
+    <Compile Include="ViewModels\Comments\CommentViewModel.cs" />
     <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\FactorViewModel.cs" />
@@ -235,6 +238,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\Posts\DetailsPageViewModel.cs" />
     <Compile Include="ViewModels\Posts\PostBaseViewModel.cs" />
     <Compile Include="ViewModels\Posts\PostExtendedViewModel.cs" />
     <Compile Include="ViewModels\Statistics\StatsViewModel.cs" />
@@ -341,6 +345,8 @@
     <Content Include="Scripts\jquery-2.2.0.js" />
     <Content Include="Scripts\jquery-2.2.0.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -387,6 +393,9 @@
     <Content Include="Views\Statistics\_StatsPartial.cshtml" />
     <Content Include="Views\Posts\Details.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\PostExtendedViewModel.cshtml" />
+    <Content Include="Views\Shared\_CommentAdditionPartial.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CommentViewModel.cshtml" />
+    <Content Include="Views\Shared\_CommentsListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\Home\" />

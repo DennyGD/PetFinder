@@ -1,0 +1,17 @@
+﻿@model PetFinder.Web.ViewModels.Comments.CommentInputModel
+
+@using (Ajax.BeginForm("Add", "Comments", new AjaxOptions()
+{
+    HttpMethod = "Post",
+    UpdateTargetId = "comments",
+    InsertionMode = InsertionMode.InsertAfter,
+    OnFailure = "commentAdditionFail"
+}))
+{
+    @Html.AntiForgeryToken();
+
+    @Html.TextAreaFor(m => m.Content, 5, 40, null)
+    @Html.ValidationMessageFor(m => m.Content, string.Empty, new { @class = "text-danger" })
+    <br />
+    <input type="submit" class="btn btn-success" value="Добави" />
+}
