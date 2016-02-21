@@ -1,6 +1,19 @@
 ﻿@model PetFinder.Web.ViewModels.Posts.AllPageViewModel
 
-<h2>@ViewBag.Title Page @Model.CurrentPage</h2>
+<h2 class="text-primary">Всички публикации</h2>
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-8">
+        @using (Html.BeginForm("All", "Posts", FormMethod.Get))
+        {
+            <p>
+                <b>Области</b>
+                @Html.DropDownList("Region")
+                <input type="submit" value="Търси" class="btn btn-default" />
+            </p>
+        }
+    </div>
+</div>
 
 @for (int i = 0; i < Model.Posts.Count; i++)
 {

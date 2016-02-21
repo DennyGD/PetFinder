@@ -1,6 +1,7 @@
 ﻿namespace PetFinder.Web.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -12,26 +13,32 @@
 
     public class PostsController : BaseController
     {
+        private const int DefaultPageSize = 2;
+
         private readonly IPostsService postsService;
 
         private readonly ICommentsService commentsService;
 
-        public PostsController(IPostsService postsService, ICommentsService commentsService)
+        private readonly IRegionsService regionsService;
+
+        public PostsController(IPostsService postsService, ICommentsService commentsService, IRegionsService regionsService)
             : base()
         {
             this.postsService = postsService;
             this.commentsService = commentsService;
+            this.regionsService = regionsService;
         }
 
         [HttpGet]
         public ActionResult All(int id = 1)
         {
+            var queryForRegion = this.HttpContext.Request.QueryString["Region"];
             var posts = this.postsService
-                .All(id, 2)
+                .All(id, DefaultPageSize, queryForRegion)
                 .To<PostBaseViewModel>()
                 .ToList();
 
-            var totalPages = (int)Math.Ceiling(this.postsService.AllPostsCount() / (decimal)2);
+            var totalPages = (int)Math.Ceiling(this.postsService.AllPostsCount(queryForRegion) / (decimal)DefaultPageSize);
             var data = new AllPageViewModel()
             {
                 CurrentPage = id,
@@ -39,6 +46,7 @@
                 Posts = posts
             };
 
+            ViewBag.Region = this.GetRegions(queryForRegion);
             return this.View(data);
         }
 
@@ -67,6 +75,25 @@
             this.ViewBag.PostId = postMainInfo.Id;
 
             return this.View(data);
+        }
+
+        private IEnumerable<SelectListItem> GetRegions(string defaultSelectedRegion)
+        {
+            // TODO should cache this
+            var allRegions = this.regionsService.All(false).ToList();
+
+            defaultSelectedRegion = defaultSelectedRegion ?? Others.AllRegions;
+
+            var result = new List<SelectListItem>();
+            result.Add(new SelectListItem() { Text = Others.AllRegions, Value = Others.AllRegions, Selected = defaultSelectedRegion == Others.AllRegions });
+            allRegions.ForEach(x => result.Add(new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.Name,
+                Selected = x.Name == defaultSelectedRegion
+            }));
+
+            return result;
         }
     }
 }
