@@ -2,11 +2,11 @@
 {
     using System.Collections.Generic;
 
+    using Shared;
+
     public class AllPageViewModel
     {
-        public int CurrentPage { get; set; }
-
-        public int TotalPages { get; set; }
+        public PageInfo PageInfo { get; set; }
 
         public IList<PostBaseViewModel> Posts { get; set; }
     }

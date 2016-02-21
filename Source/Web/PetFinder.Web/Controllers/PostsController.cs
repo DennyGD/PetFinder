@@ -10,7 +10,7 @@
     using ViewModels.Comments;
     using Infrastructure.Mapping;
     using PetFinder.Common.Constants;
-
+    using ViewModels.Shared;
     public class PostsController : BaseController
     {
         private const int DefaultPageSize = 2;
@@ -39,10 +39,10 @@
                 .ToList();
 
             var totalPages = (int)Math.Ceiling(this.postsService.AllPostsCount(queryForRegion) / (decimal)DefaultPageSize);
+            var pageInfo = new PageInfo() { CurrentPage = id, TotalPages = totalPages };
             var data = new AllPageViewModel()
             {
-                CurrentPage = id,
-                TotalPages = totalPages,
+                PageInfo = pageInfo,
                 Posts = posts
             };
 
