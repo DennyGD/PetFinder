@@ -1,0 +1,41 @@
+﻿@using Kendo.Mvc.UI;
+
+@section stylesInHead {
+    @Styles.Render("~/Content/kendo")
+}
+
+@section scriptsInHead {
+    @Scripts.Render("~/bundles/kendo")
+}
+
+<h1 class="text-primary">Admin panel for the comments</h1>
+<br />
+
+@(Html.Kendo().Grid<PetFinder.Data.Models.Comment>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+        columns.Bound(c => c.Content);
+        columns.Bound(c => c.CreatedOn).Width(120);
+        columns.Bound(c => c.ModifiedOn).Width(120);
+        columns.Bound(c => c.IsDeleted).Width(120);
+        columns.Bound(c => c.DeletedOn).Width(120);
+        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
+      })
+      .ColumnMenu()
+      .Editable(editable => editable.Mode(GridEditMode.PopUp))
+      .Pageable()
+      .Navigatable()
+      .Sortable(sortable => {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Filterable()
+      .Scrollable(x => x.Height("auto"))
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model => model.Id(p => p.Id))
+          .Read(read => read.Action("Comments_Read", "Comments"))
+          .Update(update => update.Action("Comments_Update", "Comments"))
+          .Destroy(destroy => destroy.Action("Comments_Destroy", "Comments"))
+      )
+)
