@@ -23,7 +23,8 @@
         public string Content { get; set; }
 
         //[Required]
-        //public DateTime EventTime { get; set; }
+        [Display(Name = "Време на събитието")]
+        public DateTime EventTime { get; set; }
 
         public int RegionId { get; set; }
 
