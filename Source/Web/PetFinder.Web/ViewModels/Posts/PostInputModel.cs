@@ -24,6 +24,6 @@
 
         public int PostCategoryId { get; set; }
 
-        //public int PetId { get; set; }
+        public int PetId { get; set; }
     }
 }

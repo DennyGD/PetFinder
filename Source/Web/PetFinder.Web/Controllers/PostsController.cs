@@ -25,19 +25,23 @@
 
         private readonly IPostCategoriesService postCategoriesService;
 
+        private readonly IPetsService petsService;
+
         public IDropdownListService Dropdown { get; set; }
 
         public PostsController(
             IPostsService postsService, 
             ICommentsService commentsService, 
             IRegionsService regionsService, 
-            IPostCategoriesService postCategoriesService)
+            IPostCategoriesService postCategoriesService, 
+            IPetsService petsService)
             : base()
         {
             this.postsService = postsService;
             this.commentsService = commentsService;
             this.regionsService = regionsService;
             this.postCategoriesService = postCategoriesService;
+            this.petsService = petsService;
         }
 
         [HttpGet]
@@ -138,6 +142,21 @@
             this.ViewBag.Name = name;
 
             var data = this.Dropdown.PostCategories(allPostCategories);
+            return this.PartialView(Others.DropdownPartialName, data);
+        }
+
+        [HttpGet]
+        [ChildActionOnly]
+        public ActionResult Pets(string name)
+        {
+            var allPets = this.Cache
+                .Get("allPets",
+                () => this.petsService.All(false).ToList(),
+                30 * 60);
+
+            this.ViewBag.Name = name;
+
+            var data = this.Dropdown.Pets(allPets);
             return this.PartialView(Others.DropdownPartialName, data);
         }
     }

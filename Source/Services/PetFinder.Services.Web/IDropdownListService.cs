@@ -12,5 +12,7 @@
         IEnumerable<SelectListItem> RegionsForAddition(List<Region> regions);
 
         IEnumerable<SelectListItem> PostCategories(List<PostCategory> postCategories);
+
+        IEnumerable<SelectListItem> Pets(List<Pet> pets);
     }
 }

@@ -30,6 +30,7 @@
             return result;
         }
 
+        // the following methods could be refactored
         public IEnumerable<SelectListItem> RegionsForAddition(List<Region> regions)
         {
             var result = new List<SelectListItem>();
@@ -46,6 +47,18 @@
         {
             var result = new List<SelectListItem>();
             postCategories.ForEach(x => result.Add(new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.Id.ToString()
+            }));
+
+            return result;
+        }
+
+        public IEnumerable<SelectListItem> Pets(List<Pet> pets)
+        {
+            var result = new List<SelectListItem>();
+            pets.ForEach(x => result.Add(new SelectListItem()
             {
                 Text = x.Name,
                 Value = x.Id.ToString()
