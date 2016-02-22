@@ -1,92 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using Kendo.Mvc.Extensions;
-using Kendo.Mvc.UI;
-using PetFinder.Data.Models;
-using PetFinder.Data;
-
-namespace PetFinder.Web.Areas.Administration.Controllers
+﻿namespace PetFinder.Web.Areas.Administration.Controllers
 {
+    using System.Web.Mvc;
+
+    using Infrastructure.Mapping;
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI;
+    using PetFinder.Services.Data.Contracts;
+    using ViewModels;
+
     public class CommentsController : BaseAdminController
     {
-        private AppDbContext db = new AppDbContext();
+        private readonly ICommentsService commentsService;
+
+        public CommentsController(ICommentsService commentsService)
+        {
+            this.commentsService = commentsService;
+        }
 
         public ActionResult Index()
         {
-            return View();
+            return this.View();
         }
 
         public ActionResult Comments_Read([DataSourceRequest]DataSourceRequest request)
         {
-            IQueryable<Comment> comments = db.Comments;
-            DataSourceResult result = comments.ToDataSourceResult(request, comment => new {
-                Id = comment.Id,
-                Content = comment.Content,
-                CreatedOn = comment.CreatedOn,
-                ModifiedOn = comment.ModifiedOn,
-                IsDeleted = comment.IsDeleted,
-                DeletedOn = comment.DeletedOn
-            });
+            var result = this.commentsService
+                .All(true)
+                .To<CommentAdminViewModel>()
+                .ToDataSourceResult(request);
 
-            return Json(result);
+            return this.Json(result);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Comments_Update([DataSourceRequest]DataSourceRequest request, Comment comment)
+        public ActionResult Comments_Update([DataSourceRequest]DataSourceRequest request, CommentAdminViewModel comment)
         {
             if (ModelState.IsValid)
             {
-                var entity = new Comment
-                {
-                    Id = comment.Id,
-                    Content = comment.Content,
-                    CreatedOn = comment.CreatedOn,
-                    ModifiedOn = comment.ModifiedOn,
-                    IsDeleted = comment.IsDeleted,
-                    DeletedOn = comment.DeletedOn
-                };
-
-                db.Comments.Attach(entity);
-                db.Entry(entity).State = EntityState.Modified;
-                db.SaveChanges();
+                this.commentsService.Update(comment.Content, comment.IsDeleted, comment.Id);
             }
 
-            return Json(new[] { comment }.ToDataSourceResult(request, ModelState));
+            var commentById = this.commentsService.ById(comment.Id, true);
+            var data = this.Mapper.Map<CommentAdminViewModel>(commentById);
+            return this.Json(new[] { data }.ToDataSourceResult(request, this.ModelState));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Comments_Destroy([DataSourceRequest]DataSourceRequest request, Comment comment)
+        public ActionResult Comments_Destroy([DataSourceRequest]DataSourceRequest request, CommentAdminViewModel comment)
         {
-            if (ModelState.IsValid)
-            {
-                var entity = new Comment
-                {
-                    Id = comment.Id,
-                    Content = comment.Content,
-                    CreatedOn = comment.CreatedOn,
-                    ModifiedOn = comment.ModifiedOn,
-                    IsDeleted = comment.IsDeleted,
-                    DeletedOn = comment.DeletedOn
-                };
+            this.commentsService.Delete(comment.Id);
 
-                db.Comments.Attach(entity);
-                db.Comments.Remove(entity);
-                db.SaveChanges();
-            }
-
-            return Json(new[] { comment }.ToDataSourceResult(request, ModelState));
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
+            return this.Json(new[] { comment }.ToDataSourceResult(request, this.ModelState));
         }
     }
 }

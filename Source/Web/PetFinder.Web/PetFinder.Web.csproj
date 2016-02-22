@@ -206,6 +206,7 @@
     <Compile Include="Areas\Administration\Controllers\BaseAdminController.cs" />
     <Compile Include="Areas\Administration\Controllers\CommentsController.cs" />
     <Compile Include="Areas\Administration\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Administration\ViewModels\CommentAdminViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\UserAdminViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -346,6 +347,7 @@
     <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\EditorTemplates\UserAdminViewModel.cshtml" />
     <Content Include="Areas\Administration\Views\Comments\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\EditorTemplates\CommentAdminViewModel.cshtml" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.0.js" />
     <Content Include="Scripts\jquery-2.2.0.min.js" />

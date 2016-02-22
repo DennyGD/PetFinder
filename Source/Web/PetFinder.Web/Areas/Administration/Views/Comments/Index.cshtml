@@ -11,7 +11,7 @@
 <h1 class="text-primary">Admin panel for the comments</h1>
 <br />
 
-@(Html.Kendo().Grid<PetFinder.Data.Models.Comment>()
+@(Html.Kendo().Grid<PetFinder.Web.Areas.Administration.ViewModels.CommentAdminViewModel>()
       .Name("grid")
       .Columns(columns =>
       {
