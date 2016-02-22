@@ -7,5 +7,7 @@
     public interface IPostCategoriesService
     {
         IQueryable<PostCategory> All(bool includeDeleted);
+
+        PostCategory ById(int id, bool includeDeleted);
     }
 }

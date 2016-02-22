@@ -12,7 +12,7 @@
     using PetFinder.Common.Constants;
     using ViewModels.Shared;
     using Services.Web;
-
+    using Microsoft.AspNet.Identity;
     public class PostsController : BaseController
     {
         private const int DefaultPageSize = 5;
@@ -104,6 +104,20 @@
         [ValidateAntiForgeryToken]
         public ActionResult Add(PostInputModel post)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(post);
+            }
+
+            var currentUserId = this.User.Identity.GetUserId();
+            var newPost = this.postsService.Add(post.Title, post.Content, post.EventTime, post.RegionId, post.PostCategoryId, post.PetId, currentUserId);
+            if (newPost == null)
+            {
+                this.ModelState.AddModelError(string.Empty, "Възникна грешка.");
+                return this.View(post);
+            }
+
+            // redirect to Details
             return null;
         }
 

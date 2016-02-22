@@ -26,5 +26,17 @@
                 return this.postCategoriesRepo.All();
             }
         }
+
+        public PostCategory ById(int id, bool includeDeleted)
+        {
+            if (includeDeleted)
+            {
+                return this.postCategoriesRepo.AllWithDeleted().Where(x => x.Id == id).FirstOrDefault();
+            }
+            else
+            {
+                return this.postCategoriesRepo.GetById(id);
+            }
+        }
     }
 }

@@ -26,5 +26,17 @@
                 return this.petsRepo.All();
             }
         }
+
+        public Pet ById(int id, bool includeDeleted)
+        {
+            if (includeDeleted)
+            {
+                return this.petsRepo.AllWithDeleted().Where(x => x.Id == id).FirstOrDefault();
+            }
+            else
+            {
+                return this.petsRepo.GetById(id);
+            }
+        }
     }
 }

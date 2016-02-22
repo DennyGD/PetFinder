@@ -13,9 +13,26 @@
     {
         private readonly IDbRepository<Post> postsRepo;
 
-        public PostsService(IDbRepository<Post> postsRepo)
+        private readonly IRegionsService regionsService;
+
+        private readonly IPostCategoriesService postCategoriesService;
+
+        private readonly IPetsService petsService;
+
+        private readonly IUsersService usersService;
+
+        public PostsService(
+            IDbRepository<Post> postsRepo, 
+            IRegionsService regionsService, 
+            IPostCategoriesService postCategoriesService, 
+            IPetsService petsService, 
+            IUsersService usersService)
         {
             this.postsRepo = postsRepo;
+            this.regionsService = regionsService;
+            this.postCategoriesService = postCategoriesService;
+            this.petsService = petsService;
+            this.usersService = usersService;
         }
 
         public IQueryable<Post> LastByCategory(string category, int count = 5)
@@ -81,6 +98,64 @@
             }
 
             return this.postsRepo.All().Where(x => x.Region.Name.Contains(region)).Count();
+        }
+
+        // this looks awful :/
+        public Post Add(string title, string content, DateTime eventTime, int regionId, int postCategoryId, int petId, string userId)
+        {
+            var dateTimeNow = DateTime.Now;
+            if (eventTime > dateTimeNow || eventTime < dateTimeNow.AddYears(-1))
+            {
+                return null;
+            }
+
+            var region = this.regionsService.ById(regionId, false);
+            if (region == null)
+            {
+                return null;
+            }
+
+            var postCategory = this.postCategoriesService.ById(postCategoryId, false);
+            if (postCategory == null)
+            {
+                return null;
+            }
+
+            var pet = this.petsService.ById(petId, false);
+            if (pet == null)
+            {
+                return null;
+            }
+
+            var user = this.usersService.ById(userId, false);
+            if (user == null)
+            {
+                return null;
+            }
+
+            var post = new Post()
+            {
+                Title = title,
+                Content = content,
+                EventTime = eventTime,
+                Region = region,
+                PostCategory = postCategory,
+                Pet = pet,
+                User = user
+            };
+
+            this.postsRepo.Add(post);
+
+            try
+            {
+                this.postsRepo.Save();
+                return this.ById(post.Id);
+            }
+            catch (Exception)
+            {
+                // log
+                return null;
+            }
         }
     }
 }

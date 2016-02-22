@@ -7,5 +7,7 @@
     public interface IRegionsService
     {
         IQueryable<Region> All(bool includeDeleted);
+
+        Region ById(int id, bool includeDeleted);
     }
 }

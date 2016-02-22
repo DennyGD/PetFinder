@@ -26,5 +26,17 @@
                 return this.regionsRepo.All();
             }
         }
+
+        public Region ById(int id, bool includeDeleted)
+        {
+            if (includeDeleted)
+            {
+                return this.regionsRepo.AllWithDeleted().Where(x => x.Id == id).FirstOrDefault();
+            }
+            else
+            {
+                return this.regionsRepo.GetById(id);
+            }
+        }
     }
 }

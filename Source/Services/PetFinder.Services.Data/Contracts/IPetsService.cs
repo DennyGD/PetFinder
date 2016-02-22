@@ -7,5 +7,7 @@
     public interface IPetsService
     {
         IQueryable<Pet> All(bool includeDeleted);
+
+        Pet ById(int id, bool includeDeleted);
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace PetFinder.Services.Data.Contracts
 {
+    using System;
     using System.Linq;
 
     using PetFinder.Data.Models;
@@ -15,5 +16,7 @@
         Post ById(int id);
 
         int AllPostsCount(string region);
+
+        Post Add(string title, string content, DateTime eventTime, int regionId, int postCategoryId, int petId, string userId);
     }
 }
