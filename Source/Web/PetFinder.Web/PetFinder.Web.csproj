@@ -208,6 +208,7 @@
     <Compile Include="Areas\Administration\Controllers\UsersController.cs" />
     <Compile Include="Areas\Administration\ViewModels\CommentAdminViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\UserAdminViewModel.cs" />
+    <Compile Include="Areas\Private\PrivateAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
@@ -352,6 +353,7 @@
     <Content Include="Areas\Administration\Views\Shared\EditorTemplates\UserAdminViewModel.cshtml" />
     <Content Include="Areas\Administration\Views\Comments\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\EditorTemplates\CommentAdminViewModel.cshtml" />
+    <Content Include="Areas\Private\Views\web.config" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.0.js" />
     <Content Include="Scripts\jquery-2.2.0.min.js" />
@@ -416,6 +418,9 @@
     <Content Include="Views\Shared\DisplayTemplates\ImageViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Private\Controllers\" />
+    <Folder Include="Areas\Private\Models\" />
+    <Folder Include="Areas\Private\Views\Shared\" />
     <Folder Include="ViewModels\Home\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Comments\" />
