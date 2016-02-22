@@ -14,11 +14,27 @@ else
         <div class="row">
             @Model.Content
         </div>
-        <div class"="row">
-            <p class="small">от <strong>@Model.User</strong></p>
-        </div>
-        <div class="row">
-            <p class="small"><i>@Model.CommentsCount коментар(и)</i></p>
-        </div>
+    </div>
+    <div class="col-md-4">
+        @if (Model.Image != null)
+        {
+            var contentInBase64 = Convert.ToBase64String(Model.Image.Content);
+            var imageSource = string.Format("data:{0};base64,{1}", Model.Image.Extension, contentInBase64);
+            <img src='@imageSource' class="img-responsive" />
+            // TODO all images!
+        }
+        else
+        {
+            <img src=@Url.Content("~/Content/images/no-image.jpg") class="img-responsive"/>
+        }
+    </div>
+    <br />
+    <br />
+    <br />
+    <div class"="row">
+        <p class="small">от <strong>@Model.User</strong></p>
+    </div>
+    <div class="row">
+        <p class="small"><i>@Model.CommentsCount коментар(и)</i></p>
     </div>
 </div>

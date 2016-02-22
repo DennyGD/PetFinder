@@ -162,14 +162,16 @@
                 User = user
             };
 
-            // files!
-            foreach (var item in files)
+            if (files.Count() <= 3)
             {
-                var image = this.GetImage(item);
-                if (image != null)
+                foreach (var item in files)
                 {
-                    this.imagesRepo.Add(image);
-                    post.Images.Add(image);
+                    var image = this.GetImage(item);
+                    if (image != null)
+                    {
+                        this.imagesRepo.Add(image);
+                        post.Images.Add(image);
+                    }
                 }
             }
 

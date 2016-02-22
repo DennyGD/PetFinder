@@ -22,7 +22,7 @@
         [DataType(DataType.MultilineText)]
         public string Content { get; set; }
 
-        //[Required]
+        [Required]
         [Display(Name = "Време на събитието")]
         public DateTime EventTime { get; set; }
 

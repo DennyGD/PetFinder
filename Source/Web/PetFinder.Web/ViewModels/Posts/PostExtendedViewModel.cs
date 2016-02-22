@@ -6,8 +6,8 @@
     using Comments;
     using Data.Models;
     using Infrastructure.Mapping;
-    
-    // TODO must add more info
+    using Images;
+    using System.Linq;    // TODO must add more info
     public class PostExtendedViewModel : IMapFrom<Post>, IHaveCustomMappings
     {
         public int Id { get; set; }
@@ -22,6 +22,8 @@
 
         public bool IsSolved { get; set; }
 
+        public ImageViewModel Image { get; set; }
+
         public void CreateMappings(IMapperConfiguration configuration)
         {
             configuration.CreateMap<Post, PostExtendedViewModel>()
@@ -34,6 +36,10 @@
                 x => x.CommentsCount,
                 opts => opts.MapFrom(x => x.Comments.Count));
 
+            configuration.CreateMap<Post, PostExtendedViewModel>()
+                .ForMember(
+                x => x.Image,
+                opts => opts.MapFrom(x => x.Images.FirstOrDefault()));
         }
     }
 }
