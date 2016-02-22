@@ -8,7 +8,17 @@ else
 {
     <div class="alert alert-danger"> Случаят все още не е разрешен.</div>
 }
+<div class="row">
+    <h4>
+        <span class="label label-primary">@Model.PostCategory</span>
+        <span class="label label-success">@Model.Pet</span>
+        <span class="label label-warning">@Model.Region</span>
+    </h4>
+</div>
+<br />
 <h2 class="text-center text-primary">@Model.Title</h2>
+<br />
+<br />
 <div class="row">
     <div class="col-md-8">
         <div class="row">
@@ -18,10 +28,9 @@ else
     <div class="col-md-4">
         @if (Model.Image != null)
         {
-            var contentInBase64 = Convert.ToBase64String(Model.Image.Content);
-            var imageSource = string.Format("data:{0};base64,{1}", Model.Image.Extension, contentInBase64);
-            <img src='@imageSource' class="img-responsive" />
-            // TODO all images!
+            @Html.DisplayFor(m => m.Image)
+            <br />
+            @Html.ActionLink("Всички снимки", "All/" + Model.Id, "Images", null, htmlAttributes: new { @class = "btn-link" })
         }
         else
         {

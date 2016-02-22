@@ -1,0 +1,8 @@
+﻿@model PetFinder.Web.ViewModels.Images.ImageViewModel
+
+@{ 
+    var contentInBase64 = Convert.ToBase64String(Model.Content);
+    var imageSource = string.Format("data:{0};base64,{1}", Model.Extension, contentInBase64);
+}
+
+<img src='@imageSource' class="img-responsive" />

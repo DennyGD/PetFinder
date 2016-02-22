@@ -22,6 +22,12 @@
 
         public bool IsSolved { get; set; }
 
+        public string Region { get; set; }
+
+        public string PostCategory { get; set; }
+
+        public string Pet { get; set; }
+
         public ImageViewModel Image { get; set; }
 
         public void CreateMappings(IMapperConfiguration configuration)
@@ -40,6 +46,21 @@
                 .ForMember(
                 x => x.Image,
                 opts => opts.MapFrom(x => x.Images.FirstOrDefault()));
+
+            configuration.CreateMap<Post, PostExtendedViewModel>()
+                .ForMember(
+                x => x.Region,
+                opts => opts.MapFrom(x => x.Region.Name));
+
+            configuration.CreateMap<Post, PostExtendedViewModel>()
+                .ForMember(
+                x => x.PostCategory,
+                opts => opts.MapFrom(x => x.PostCategory.Name));
+
+            configuration.CreateMap<Post, PostExtendedViewModel>()
+                .ForMember(
+                x => x.Pet,
+                opts => opts.MapFrom(x => x.Pet.Name));
         }
     }
 }

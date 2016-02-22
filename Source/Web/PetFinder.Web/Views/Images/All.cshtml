@@ -1,0 +1,13 @@
+﻿@model IEnumerable<PetFinder.Web.ViewModels.Images.ImageViewModel>
+
+<br />
+<br />
+
+@if (Model.Count() < 1)
+{
+    <img src=@Url.Content("~/Content/images/no-image.jpg") class="img-responsive" />
+}
+else
+{
+    @Html.DisplayForModel()   
+}

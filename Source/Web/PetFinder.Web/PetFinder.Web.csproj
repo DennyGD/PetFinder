@@ -212,6 +212,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="App_Start\GlimpseSecurityPolicy.cs" />
     <Compile Include="Controllers\PostsController.cs" />
@@ -411,6 +412,8 @@
     <Content Include="Views\Shared\_PaginationPartial.cshtml" />
     <Content Include="Views\Posts\Add.cshtml" />
     <Content Include="Views\Shared\_DropdownPartial.cshtml" />
+    <Content Include="Views\Images\All.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ImageViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\Home\" />
