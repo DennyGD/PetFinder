@@ -1,17 +1,23 @@
 ﻿namespace PetFinder.Services.Data
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
+    using System.Web;
 
     using Contracts;
     using PetFinder.Common.Constants;
     using PetFinder.Data.Common;
     using PetFinder.Data.Models;
-
+    using System.IO;
     public class PostsService : IPostsService
     {
+        private const int MaxFileSizeInKiloBytes = 120000;
+
         private readonly IDbRepository<Post> postsRepo;
+
+        private readonly IDbRepository<Image> imagesRepo;
 
         private readonly IRegionsService regionsService;
 
@@ -21,14 +27,18 @@
 
         private readonly IUsersService usersService;
 
+        private List<string> allowedFileExtensions = new List<string>() { "jpg", "jpeg", "png" };
+
         public PostsService(
-            IDbRepository<Post> postsRepo, 
+            IDbRepository<Post> postsRepo,
+            IDbRepository<Image> imagesRepo,
             IRegionsService regionsService, 
             IPostCategoriesService postCategoriesService, 
             IPetsService petsService, 
             IUsersService usersService)
         {
             this.postsRepo = postsRepo;
+            this.imagesRepo = imagesRepo;
             this.regionsService = regionsService;
             this.postCategoriesService = postCategoriesService;
             this.petsService = petsService;
@@ -100,8 +110,16 @@
             return this.postsRepo.All().Where(x => x.Region.Name.Contains(region)).Count();
         }
 
-        // this looks awful :/
-        public Post Add(string title, string content, DateTime eventTime, int regionId, int postCategoryId, int petId, string userId)
+        // Mordor in code :/
+        public Post Add(
+            string title, 
+            string content, 
+            DateTime eventTime, 
+            int regionId, 
+            int postCategoryId, 
+            int petId, 
+            string userId, 
+            IEnumerable<HttpPostedFileBase> files)
         {
             var dateTimeNow = DateTime.Now;
             if (eventTime > dateTimeNow || eventTime < dateTimeNow.AddYears(-1))
@@ -144,11 +162,23 @@
                 User = user
             };
 
+            // files!
+            foreach (var item in files)
+            {
+                var image = this.GetImage(item);
+                if (image != null)
+                {
+                    this.imagesRepo.Add(image);
+                    post.Images.Add(image);
+                }
+            }
+
             this.postsRepo.Add(post);
 
             try
             {
                 this.postsRepo.Save();
+                this.imagesRepo.Save();
                 return this.ById(post.Id);
             }
             catch (Exception)
@@ -156,6 +186,34 @@
                 // log
                 return null;
             }
+        }
+
+        private Image GetImage(HttpPostedFileBase file)
+        {
+            if (file == null)
+            {
+                return null;
+            }
+
+            Image image = null;
+            using (var memory = new MemoryStream())
+            {
+                file.InputStream.CopyTo(memory);
+                var content = memory.GetBuffer();
+
+                var fileName = file.FileName;
+                var lastDotIndex = fileName.LastIndexOf('.');
+                var fileExtension = (fileName.Substring(lastDotIndex + 1)).ToLower();
+                var fileSize = file.ContentLength;
+                if (fileSize <= MaxFileSizeInKiloBytes && this.allowedFileExtensions.Contains(fileExtension))
+                {
+                    image = new Image();
+                    image.Content = content;
+                    image.FileExtension = fileExtension;
+                }
+            }
+
+            return image;
         }
     }
 }

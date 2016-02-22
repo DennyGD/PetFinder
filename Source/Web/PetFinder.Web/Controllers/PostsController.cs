@@ -110,15 +110,14 @@
             }
 
             var currentUserId = this.User.Identity.GetUserId();
-            var newPost = this.postsService.Add(post.Title, post.Content, post.EventTime, post.RegionId, post.PostCategoryId, post.PetId, currentUserId);
+            var newPost = this.postsService.Add(post.Title, post.Content, post.EventTime, post.RegionId, post.PostCategoryId, post.PetId, currentUserId, post.UploadedFiles);
             if (newPost == null)
             {
                 this.ModelState.AddModelError(string.Empty, "Възникна грешка.");
                 return this.View(post);
             }
 
-            // redirect to Details
-            return null;
+            return this.RedirectToAction(nameof(this.Details), new { id = newPost.Id });
         }
 
         [HttpGet]

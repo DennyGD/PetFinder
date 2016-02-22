@@ -1,7 +1,9 @@
 ﻿namespace PetFinder.Services.Data.Contracts
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Web;
 
     using PetFinder.Data.Models;
 
@@ -17,6 +19,6 @@
 
         int AllPostsCount(string region);
 
-        Post Add(string title, string content, DateTime eventTime, int regionId, int postCategoryId, int petId, string userId);
+        Post Add(string title, string content, DateTime eventTime, int regionId, int postCategoryId, int petId, string userId, IEnumerable<HttpPostedFileBase> files);
     }
 }
