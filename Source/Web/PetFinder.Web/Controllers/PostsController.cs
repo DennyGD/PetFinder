@@ -11,6 +11,7 @@
     using Infrastructure.Mapping;
     using PetFinder.Common.Constants;
     using ViewModels.Shared;
+    using Services.Web;
 
     public class PostsController : BaseController
     {
@@ -21,6 +22,8 @@
         private readonly ICommentsService commentsService;
 
         private readonly IRegionsService regionsService;
+
+        public IDropdownListService Dropdown { get; set; }
 
         public PostsController(IPostsService postsService, ICommentsService commentsService, IRegionsService regionsService)
             : base()
@@ -47,7 +50,7 @@
                 Posts = posts
             };
 
-            ViewBag.Region = this.GetRegions(queryForRegion);
+            ViewBag.Selected = queryForRegion;
             return this.View(data);
         }
 
@@ -78,23 +81,42 @@
             return this.View(data);
         }
 
-        private IEnumerable<SelectListItem> GetRegions(string defaultSelectedRegion)
+        [HttpGet]
+        [Authorize]
+        public ActionResult Add()
         {
-            // TODO should cache this
-            var allRegions = this.regionsService.All(false).ToList();
+            return this.View();
+        }
 
-            defaultSelectedRegion = defaultSelectedRegion ?? Others.AllRegions;
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(PostInputModel post)
+        {
+            return null;
+        }
 
-            var result = new List<SelectListItem>();
-            result.Add(new SelectListItem() { Text = Others.AllRegions, Value = Others.AllRegions, Selected = defaultSelectedRegion == Others.AllRegions });
-            allRegions.ForEach(x => result.Add(new SelectListItem()
+        [HttpGet]
+        [ChildActionOnly]
+        public ActionResult Regions(bool toUseForAddition, string name, string selected = null)
+        {
+            var allRegions = this.Cache
+                .Get("allRegions",
+                () => this.regionsService.All(false).ToList(),
+                30 * 60);
+
+            IEnumerable<SelectListItem> data = null;
+            if (toUseForAddition)
             {
-                Text = x.Name,
-                Value = x.Name,
-                Selected = x.Name == defaultSelectedRegion
-            }));
+                data = this.Dropdown.RegionsForAddition(allRegions);
+            }
+            else
+            {
+                data = this.Dropdown.RegionsForSearch(allRegions, selected);
+            }
 
-            return result;
+            this.ViewBag.Name = name;
+            return this.PartialView("_DropdownPartial", data);
         }
     }
 }

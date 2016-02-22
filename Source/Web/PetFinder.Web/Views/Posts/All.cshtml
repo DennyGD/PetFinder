@@ -1,5 +1,9 @@
 ﻿@model PetFinder.Web.ViewModels.Posts.AllPageViewModel
 
+@{ 
+    var selectedItem = (string)ViewBag.Selected;
+}
+
 <h2 class="text-primary">Всички публикации</h2>
 
 <div class="row">
@@ -8,7 +12,7 @@
         {
             <p>
                 <b>Области</b>
-                @Html.DropDownList("Region")
+                @Html.Action("Regions", new { toUseForAddition = false, name = "Region", selected = selectedItem })
                 <input type="submit" value="Търси" class="btn btn-default" />
             </p>
         }

@@ -1,0 +1,7 @@
+﻿@model IEnumerable<SelectListItem>
+
+@{ 
+    var name = (string)ViewBag.Name; 
+}
+
+@Html.DropDownList(name, Model)

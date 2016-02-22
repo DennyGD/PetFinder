@@ -56,6 +56,9 @@
             builder.Register(x => new IdentifierProvider())
                 .As<IIdentifierProvider>()
                 .InstancePerRequest();
+            builder.Register(x => new DropdownListService())
+                .As<IDropdownListService>()
+                .InstancePerRequest();
 
             var servicesAssembly = Assembly.GetAssembly(typeof(IPostsService));
             builder.RegisterAssemblyTypes(servicesAssembly).AsImplementedInterfaces();

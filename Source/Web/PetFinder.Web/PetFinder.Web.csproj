@@ -244,6 +244,7 @@
     <Compile Include="ViewModels\Posts\DetailsPageViewModel.cs" />
     <Compile Include="ViewModels\Posts\PostBaseViewModel.cs" />
     <Compile Include="ViewModels\Posts\PostExtendedViewModel.cs" />
+    <Compile Include="ViewModels\Posts\PostInputModel.cs" />
     <Compile Include="ViewModels\Shared\PageInfo.cs" />
     <Compile Include="ViewModels\Statistics\StatsViewModel.cs" />
   </ItemGroup>
@@ -406,6 +407,8 @@
     <Content Include="Views\Shared\_SingleCommentPartial.cshtml" />
     <Content Include="Views\Posts\All.cshtml" />
     <Content Include="Views\Shared\_PaginationPartial.cshtml" />
+    <Content Include="Views\Posts\Add.cshtml" />
+    <Content Include="Views\Shared\_DropdownPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\Home\" />
