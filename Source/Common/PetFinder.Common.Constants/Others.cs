@@ -9,5 +9,7 @@
         public const int DefaultTakeSizeForComments = 5;
 
         public const string AllRegions = "Всички";
+
+        public const string DropdownPartialName = "_DropdownPartial";
     }
 }

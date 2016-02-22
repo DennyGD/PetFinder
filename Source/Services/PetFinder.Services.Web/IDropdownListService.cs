@@ -10,5 +10,7 @@
         IEnumerable<SelectListItem> RegionsForSearch(List<Region> regions, string defaultSelectedRegion);
 
         IEnumerable<SelectListItem> RegionsForAddition(List<Region> regions);
+
+        IEnumerable<SelectListItem> PostCategories(List<PostCategory> postCategories);
     }
 }

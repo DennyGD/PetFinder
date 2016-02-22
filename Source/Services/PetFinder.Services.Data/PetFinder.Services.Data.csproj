@@ -61,9 +61,11 @@
   <ItemGroup>
     <Compile Include="CommentsService.cs" />
     <Compile Include="Contracts\ICommentsService.cs" />
+    <Compile Include="Contracts\IPostCategoriesService.cs" />
     <Compile Include="Contracts\IPostsService.cs" />
     <Compile Include="Contracts\IRegionsService.cs" />
     <Compile Include="Contracts\IUsersService.cs" />
+    <Compile Include="PostCategoriesService.cs" />
     <Compile Include="PostsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegionsService.cs" />

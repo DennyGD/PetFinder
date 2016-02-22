@@ -1,13 +1,12 @@
 ﻿@model PetFinder.Web.ViewModels.Posts.PostInputModel
 
-<h1>Добави нова публикация</h1>
+<h2 class="text-primary">Добави нова публикация</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h2 class="text-primary">Add Movie</h2>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -19,7 +18,15 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.RegionId, "Director", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PostCategoryId, "Категория", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Action("PostCategories", new { name = "PostCategoryId" })
+                @Html.ValidationMessageFor(model => model.PostCategoryId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RegionId, "Област", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.Action("Regions", new { toUseForAddition = true, name = "RegionId" })
                 @Html.ValidationMessageFor(model => model.RegionId, "", new { @class = "text-danger" })
@@ -28,7 +35,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-success" />
+                <input type="submit" value="Добави" class="btn btn-success" />
             </div>
         </div>
     </div>

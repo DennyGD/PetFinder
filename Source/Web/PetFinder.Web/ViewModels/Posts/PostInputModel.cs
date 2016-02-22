@@ -22,11 +22,8 @@
 
         public int RegionId { get; set; }
 
-        //public int PostCategoryId { get; set; }
+        public int PostCategoryId { get; set; }
 
         //public int PetId { get; set; }
-
-        //[Required]
-        //public string UserId { get; set; }
     }
 }

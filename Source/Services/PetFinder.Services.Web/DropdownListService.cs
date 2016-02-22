@@ -41,5 +41,17 @@
 
             return result;
         }
+
+        public IEnumerable<SelectListItem> PostCategories(List<PostCategory> postCategories)
+        {
+            var result = new List<SelectListItem>();
+            postCategories.ForEach(x => result.Add(new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.Id.ToString()
+            }));
+
+            return result;
+        }
     }
 }

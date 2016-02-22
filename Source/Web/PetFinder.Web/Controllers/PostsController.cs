@@ -23,14 +23,21 @@
 
         private readonly IRegionsService regionsService;
 
+        private readonly IPostCategoriesService postCategoriesService;
+
         public IDropdownListService Dropdown { get; set; }
 
-        public PostsController(IPostsService postsService, ICommentsService commentsService, IRegionsService regionsService)
+        public PostsController(
+            IPostsService postsService, 
+            ICommentsService commentsService, 
+            IRegionsService regionsService, 
+            IPostCategoriesService postCategoriesService)
             : base()
         {
             this.postsService = postsService;
             this.commentsService = commentsService;
             this.regionsService = regionsService;
+            this.postCategoriesService = postCategoriesService;
         }
 
         [HttpGet]
@@ -116,7 +123,22 @@
             }
 
             this.ViewBag.Name = name;
-            return this.PartialView("_DropdownPartial", data);
+            return this.PartialView(Others.DropdownPartialName, data);
+        }
+
+        [HttpGet]
+        [ChildActionOnly]
+        public ActionResult PostCategories(string name)
+        {
+            var allPostCategories = this.Cache
+                .Get("allPostCategories",
+                () => this.postCategoriesService.All(false).ToList(),
+                30 * 60);
+
+            this.ViewBag.Name = name;
+
+            var data = this.Dropdown.PostCategories(allPostCategories);
+            return this.PartialView(Others.DropdownPartialName, data);
         }
     }
 }
