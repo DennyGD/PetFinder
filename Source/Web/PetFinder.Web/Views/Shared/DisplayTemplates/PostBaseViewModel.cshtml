@@ -1,6 +1,6 @@
 ﻿@model PetFinder.Web.ViewModels.Posts.PostBaseViewModel
 
 <div class="row">
-    <h4>@Html.ActionLink(Model.Title, "Details", "Posts", new { id = $"{Model.Id}/{Model.UrlTitle}"}, new { @class = "text-default" })</h4>
+    <h4>@Html.ActionLink(Model.Title, "Details", "Posts", new { id = $"{Model.Id}/{Model.UrlTitle}", area = string.Empty }, new { @class = "text-default" })</h4>
     <p>@Model.Content</p>
 </div>

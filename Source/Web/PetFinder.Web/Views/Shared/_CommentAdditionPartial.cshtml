@@ -4,7 +4,7 @@
     Model.PostId = ViewBag.PostId;
 }
 
-@using (Ajax.BeginForm("Add", "Comments", new AjaxOptions()
+@using (Ajax.BeginForm("Add", "Comments", new { area = string.Empty }, new AjaxOptions()
 {
     HttpMethod = "Post",
     UpdateTargetId = "comments",

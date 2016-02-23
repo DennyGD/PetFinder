@@ -1,0 +1,12 @@
+﻿@model PetFinder.Web.Areas.Private.ViewModels.UserViewModel
+
+<br />
+<br />
+<h2 class="text-primary">Моят профил</h2>
+<br />
+<hr />
+@Html.DisplayForModel()
+<hr />
+<br />
+@Html.ActionLink("Моите публикации", "MyPosts", "Users", routeValues: new { area = "Private" }, htmlAttributes: new { @class = "btn btn-success" })
+@Html.ActionLink("Моите коментари", "MyComments", "Users", routeValues: new { area = "Private" }, htmlAttributes: new { @class = "btn btn-warning" })

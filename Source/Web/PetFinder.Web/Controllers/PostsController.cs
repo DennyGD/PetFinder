@@ -54,14 +54,13 @@
                 .ToList();
 
             var totalPages = (int)Math.Ceiling(this.postsService.AllPostsCount(queryForRegion) / (decimal)DefaultPageSize);
-            var pageInfo = new PageInfo() { CurrentPage = id, TotalPages = totalPages };
+            var pageInfo = new PageInfo() { CurrentPage = id, TotalPages = totalPages, QueryForRegion = queryForRegion };
             var data = new AllPageViewModel()
             {
                 PageInfo = pageInfo,
                 Posts = posts
             };
 
-            ViewBag.Selected = queryForRegion;
             return this.View(data);
         }
 

@@ -1,0 +1,17 @@
+﻿@model PetFinder.Web.Areas.Private.ViewModels.UserViewModel
+
+<div class="row">
+    @Html.LabelFor(m => m.FirstName, new { @class = "col-md-3 h4" })
+     
+    <div class="col-md-6 text-success h4">@Model.FirstName</div>
+</div>
+<div class="row">
+    @Html.LabelFor(m => m.LastName, new { @class = "col-md-3 h4" })
+    
+    <div class="col-md-6 text-success h4">@Model.LastName</div>
+</div>
+<div class="row"> 
+    @Html.LabelFor(m => m.Email, new { @class = "col-md-3 h4" })
+    
+    <div class="col-md-6 text-success h4">@Model.Email</div>
+</div>
