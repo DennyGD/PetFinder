@@ -1,0 +1,45 @@
+﻿@using Kendo.Mvc.UI;
+
+@section stylesInHead {
+    @Styles.Render("~/Content/kendo")
+}
+
+@section scriptsInHead {
+    @Scripts.Render("~/bundles/kendo")
+}
+
+<h1 class="text-primary">Admin panel for the pets</h1>
+<br />
+
+@(Html.Kendo().Grid<PetFinder.Data.Models.Pet>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+        columns.Bound(c => c.Name);
+        columns.Bound(c => c.CreatedOn);
+        columns.Bound(c => c.ModifiedOn);
+        columns.Bound(c => c.IsDeleted);
+        columns.Bound(c => c.DeletedOn);
+        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
+      })
+      .ToolBar(toolbar => {
+            toolbar.Create();
+      })
+      .ColumnMenu()
+      .Editable(editable => editable.Mode(GridEditMode.PopUp))
+      .Pageable()
+      .Navigatable()
+      .Sortable(sortable => {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Filterable()
+      .Scrollable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model => model.Id(p => p.Id))
+          .Read(read => read.Action("Pets_Read", "Pets"))
+          .Create(create => create.Action("Pets_Create", "Pets"))
+          .Update(update => update.Action("Pets_Update", "Pets"))
+          .Destroy(destroy => destroy.Action("Pets_Destroy", "Pets"))
+      )
+)

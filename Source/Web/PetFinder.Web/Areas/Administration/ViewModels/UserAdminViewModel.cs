@@ -1,13 +1,12 @@
 ﻿namespace PetFinder.Web.Areas.Administration.ViewModels
 {
-    using System;
     using System.ComponentModel.DataAnnotations;
 
     using Data.Models;
     using Infrastructure.Mapping;
     using PetFinder.Common.Constants;
 
-    public class UserAdminViewModel : IMapFrom<User>
+    public class UserAdminViewModel : BaseAdminViewModel, IMapFrom<User>
     {
         [Required]
         public string Id { get; set; }
@@ -25,14 +24,6 @@
         [MaxLength(Models.LastNameMaxLength)]
         [MinLength(Models.LastNameMinLength)]
         public string LastName { get; set; }
-
-        public DateTime CreatedOn { get; set; }
-
-        public DateTime? ModifiedOn { get; set; }
-
-        public bool IsDeleted { get; set; }
-
-        public DateTime? DeletedOn { get; set; }
 
         public string UserName { get; set; }
     }
