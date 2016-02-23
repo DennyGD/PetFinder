@@ -3,6 +3,7 @@
     using System.Linq;
     using System.Web.Mvc;
 
+    using Common.Constants;
     using Infrastructure.Mapping;
     using Services.Data.Contracts;
     using ViewModels.Posts;
@@ -32,7 +33,7 @@
                 .To<PostBaseViewModel>()
                 .ToList();
 
-            return this.PartialView("_PostBaseListPartial", data);
+            return this.PartialView(Others.PostBaseListPartial, data);
         }
 
         [HttpGet]
@@ -45,7 +46,7 @@
                 .To<PostBaseViewModel>()
                 .ToList();
 
-            return this.PartialView("_PostBaseListPartial", data);
+            return this.PartialView(Others.PostBaseListPartial, data);
         }
     }
 }

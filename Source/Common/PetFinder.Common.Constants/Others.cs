@@ -15,5 +15,7 @@
         public const string AllRegions = "Всички";
 
         public const string DropdownPartialName = "_DropdownPartial";
+
+        public const string PostBaseListPartial = "_PostBaseListPartial";
     }
 }

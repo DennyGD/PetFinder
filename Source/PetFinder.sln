@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{12F879BF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetFinder.Tests.Web.Routes", "Tests\PetFinder.Tests.Web.Routes\PetFinder.Tests.Web.Routes.csproj", "{8C6D8A05-651D-4D78-A61E-D3716429C32D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetFinder.Tests.Web.Controllers", "Tests\PetFinder.Tests.Web.Controllers\PetFinder.Tests.Web.Controllers.csproj", "{B87282D9-5605-4E3E-81EB-4E79372DCBC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{8C6D8A05-651D-4D78-A61E-D3716429C32D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C6D8A05-651D-4D78-A61E-D3716429C32D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C6D8A05-651D-4D78-A61E-D3716429C32D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B87282D9-5605-4E3E-81EB-4E79372DCBC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B87282D9-5605-4E3E-81EB-4E79372DCBC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B87282D9-5605-4E3E-81EB-4E79372DCBC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B87282D9-5605-4E3E-81EB-4E79372DCBC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -94,5 +100,6 @@ Global
 		{5F5F68DE-4883-4F5C-A45C-9757B931BCB8} = {DB1B2EFA-018D-4EC6-8D0C-D78D40D7EC17}
 		{83741BFA-6FC4-4A3F-BEF1-B187FA8B02DA} = {DB1B2EFA-018D-4EC6-8D0C-D78D40D7EC17}
 		{8C6D8A05-651D-4D78-A61E-D3716429C32D} = {12F879BF-9C53-440C-BB20-6C7561DB93EE}
+		{B87282D9-5605-4E3E-81EB-4E79372DCBC6} = {12F879BF-9C53-440C-BB20-6C7561DB93EE}
 	EndGlobalSection
 EndGlobal
