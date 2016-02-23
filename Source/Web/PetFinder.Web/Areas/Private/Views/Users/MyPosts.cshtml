@@ -1,0 +1,12 @@
+﻿@model IEnumerable<PetFinder.Web.ViewModels.Posts.PostBaseViewModel>
+
+<h2 class="text-primary">Моите публикации</h2>
+
+@if (Model.Count() < 1)
+{
+    <h4 class="text-info">Все още нямате публикации.</h4>
+}
+else
+{
+    @Html.Partial("_PostBaseListPartial", Model)
+}

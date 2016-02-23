@@ -1,12 +1,12 @@
 ﻿namespace PetFinder.Web.Areas.Private.Controllers
 {
-    using Services.Data.Contracts;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
 
+    using Services.Data.Contracts;
+    using ViewModels;
+    using System.Linq;
+    using Web.ViewModels.Posts;
+    using Infrastructure.Mapping;
     public class UsersController : BasePrivateController
     {
         public UsersController(IUsersService usersService)
@@ -14,11 +14,23 @@
         {
         }
 
+        [HttpGet]
         public ActionResult MyProfile()
         {
-            var fullName = this.CurrentUser.FirstName + " " + this.CurrentUser.LastName;
-            this.ViewBag.Name = fullName;
-            return this.View();
+            var data = this.Mapper.Map<UserViewModel>(this.CurrentUser);
+            return this.View(data);
+        }
+
+        [HttpGet]
+        public ActionResult MyPosts()
+        {
+            var data = this.CurrentUser
+                .Posts
+                .AsQueryable()
+                .To<PostBaseViewModel>()
+                .ToList();
+
+            return this.View(data);
         }
     }
 }

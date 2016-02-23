@@ -1,7 +1,7 @@
 ﻿@model PetFinder.Web.ViewModels.Posts.AllPageViewModel
 
 @{ 
-    var selectedItem = (string)ViewBag.Selected;
+    var selectedItem = ViewBag.Selected != null ? (string)ViewBag.Selected : null;
 }
 
 <h2 class="text-primary">Всички публикации</h2>

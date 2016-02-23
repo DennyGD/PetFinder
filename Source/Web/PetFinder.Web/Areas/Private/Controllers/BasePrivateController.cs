@@ -10,7 +10,7 @@
     using Web.Controllers;
 
     [Authorize]
-    public class BasePrivateController : BaseController
+    public abstract class BasePrivateController : BaseController
     {
         public BasePrivateController(IUsersService usersService)
             : base()
