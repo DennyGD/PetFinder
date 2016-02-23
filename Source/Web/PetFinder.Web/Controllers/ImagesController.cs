@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Web.Mvc;
 
+    using Common.Constants;
     using Services.Data.Contracts;
     using ViewModels.Images;
 
@@ -23,7 +24,7 @@
 
             if (post == null)
             {
-                // TODO probably should return NotFound
+                this.TempData[Others.TempDataForError] = "Не е открит резултат.";
                 return this.RedirectToAction("Index", "Home");
             }
 
