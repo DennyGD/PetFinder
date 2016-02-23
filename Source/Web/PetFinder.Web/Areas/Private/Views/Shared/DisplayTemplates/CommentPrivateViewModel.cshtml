@@ -1,0 +1,20 @@
+﻿@model PetFinder.Web.Areas.Private.ViewModels.CommentPrivateViewModel
+
+<br />
+<div class="row">
+    <div class="col-md-6">
+        <p class="text-success">@Model.Content</p>
+        <p>
+            <small class="pull-left text-muted">@Model.CreatedOn</small>
+            @if (Model.PostIsDeleted)
+            {
+                <small class="pull-right text-muted">Публикацията не съществува.</small>
+            }
+            else
+            {
+                @Html.ActionLink("Публикация", "Details/" + Model.PostId, "Posts", routeValues: new { area = string.Empty }, htmlAttributes: new { @class = "btn-link pull-right" })
+            }
+        </p>
+    </div>
+</div>
+<hr />

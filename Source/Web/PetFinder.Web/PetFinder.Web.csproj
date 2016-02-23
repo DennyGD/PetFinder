@@ -211,6 +211,7 @@
     <Compile Include="Areas\Private\Controllers\BasePrivateController.cs" />
     <Compile Include="Areas\Private\Controllers\UsersController.cs" />
     <Compile Include="Areas\Private\PrivateAreaRegistration.cs" />
+    <Compile Include="Areas\Private\ViewModels\CommentPrivateViewModel.cs" />
     <Compile Include="Areas\Private\ViewModels\UserViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -361,6 +362,8 @@
     <Content Include="Areas\Private\Views\Users\MyProfile.cshtml" />
     <Content Include="Areas\Private\Views\Shared\DisplayTemplates\UserViewModel.cshtml" />
     <Content Include="Areas\Private\Views\Users\MyPosts.cshtml" />
+    <Content Include="Areas\Private\Views\Users\MyComments.cshtml" />
+    <Content Include="Areas\Private\Views\Shared\DisplayTemplates\CommentPrivateViewModel.cshtml" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.0.js" />
     <Content Include="Scripts\jquery-2.2.0.min.js" />

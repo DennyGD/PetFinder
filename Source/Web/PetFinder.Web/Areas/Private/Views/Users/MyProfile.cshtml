@@ -6,5 +6,7 @@
 <br />
 <hr />
 @Html.DisplayForModel()
-
-// TODO add links to posts and comments
+<hr />
+<br />
+@Html.ActionLink("Моите публикации", "MyPosts", "Users", routeValues: new { area = "Private" }, htmlAttributes: new { @class = "btn btn-success" })
+@Html.ActionLink("Моите коментари", "MyComments", "Users", routeValues: new { area = "Private" }, htmlAttributes: new { @class = "btn btn-warning" })
