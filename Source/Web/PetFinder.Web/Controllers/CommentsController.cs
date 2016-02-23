@@ -1,17 +1,16 @@
 ﻿namespace PetFinder.Web.Controllers
 {
+    using System.Linq;
     using System.Web.Mvc;
 
-    using Services.Data.Contracts;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
-
-    using PetFinder.Common.Constants;
-    using ViewModels.Comments;
+    using Infrastructure.Filters;
     using Infrastructure.Mapping;
+
     using Microsoft.AspNet.Identity;
+
+    using Services.Data.Contracts;
+    using ViewModels.Comments;
+
     public class CommentsController : BaseController
     {
         private readonly ICommentsService commentsService;
@@ -21,8 +20,8 @@
             this.commentsService = commentsService;
         }
 
-        // TODO AJAX only!
         [HttpGet]
+        [AjaxOnly]
         public ActionResult AllCommentsForPost(int id)
         {
             var data = this.commentsService
@@ -33,8 +32,8 @@
             return this.PartialView("_CommentsListPartial", data);
         }
 
-        // TODO AJAX only!
         [HttpPost]
+        [AjaxOnly]
         [ValidateAntiForgeryToken]
         public ActionResult Add(CommentInputModel comment)
         {
