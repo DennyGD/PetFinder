@@ -13,6 +13,8 @@
     using System.IO;
     public class PostsService : IPostsService
     {
+        private const int FilesMaxCount = 3;
+
         private const int MaxFileSizeInKiloBytes = 120000;
 
         private readonly IDbRepository<Post> postsRepo;
@@ -162,17 +164,22 @@
                 User = user
             };
 
-            if (files.Count() <= 3)
+            int currentFilesCount = 0;
+            foreach (var item in files)
             {
-                foreach (var item in files)
+                if (currentFilesCount >= FilesMaxCount)
                 {
-                    var image = this.GetImage(item);
-                    if (image != null)
-                    {
-                        this.imagesRepo.Add(image);
-                        post.Images.Add(image);
-                    }
+                    break;
                 }
+
+                var image = this.GetImage(item);
+                if (image != null)
+                {
+                    this.imagesRepo.Add(image);
+                    post.Images.Add(image);
+                }
+
+                currentFilesCount++;
             }
 
             this.postsRepo.Add(post);
