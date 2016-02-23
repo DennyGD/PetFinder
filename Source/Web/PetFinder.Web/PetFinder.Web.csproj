@@ -426,6 +426,7 @@
     <Content Include="Views\Shared\_DropdownPartial.cshtml" />
     <Content Include="Views\Images\All.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ImageViewModel.cshtml" />
+    <Content Include="Views\Shared\_AdminPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\Home\" />
