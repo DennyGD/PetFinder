@@ -9,5 +9,9 @@
         IQueryable<Pet> All(bool includeDeleted);
 
         Pet ById(int id, bool includeDeleted);
+
+        Pet Add(string name);
+
+        void Update(string name, bool isDeleted, int id);
     }
 }

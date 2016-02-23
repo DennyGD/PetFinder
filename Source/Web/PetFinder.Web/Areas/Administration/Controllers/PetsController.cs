@@ -1,114 +1,67 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using Kendo.Mvc.Extensions;
-using Kendo.Mvc.UI;
-using PetFinder.Data.Models;
-using PetFinder.Data;
-
-namespace PetFinder.Web.Areas.Administration.Controllers
+﻿namespace PetFinder.Web.Areas.Administration.Controllers
 {
+    using System.Web.Mvc;
+
+    using Common.Constants;
+    using Infrastructure.Mapping;
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI;
+    using Services.Data.Contracts;
+    using ViewModels;
+
     public class PetsController : BaseAdminController
     {
-        private AppDbContext db = new AppDbContext();
+        private readonly IPetsService petsService;
+
+        public PetsController(IPetsService petsService)
+        {
+            this.petsService = petsService;
+        }
 
         public ActionResult Index()
         {
-            return View();
+            return this.View();
         }
 
         public ActionResult Pets_Read([DataSourceRequest]DataSourceRequest request)
         {
-            IQueryable<Pet> pets = db.Pets;
-            DataSourceResult result = pets.ToDataSourceResult(request, pet => new {
-                Id = pet.Id,
-                Name = pet.Name,
-                CreatedOn = pet.CreatedOn,
-                ModifiedOn = pet.ModifiedOn,
-                IsDeleted = pet.IsDeleted,
-                DeletedOn = pet.DeletedOn
-            });
+            var result = this.petsService
+                .All(true)
+                .To<PetAdminViewModel>()
+                .ToDataSourceResult(request);
 
-            return Json(result);
+            return this.Json(result);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Pets_Create([DataSourceRequest]DataSourceRequest request, Pet pet)
+        public ActionResult Pets_Create([DataSourceRequest]DataSourceRequest request, PetAdminViewModel pet)
         {
-            if (ModelState.IsValid)
+            if (pet == null || string.IsNullOrWhiteSpace(pet.Name) || pet.Name.Length > Models.PetNameMaxLength)
             {
-                var entity = new Pet
-                {
-                    Name = pet.Name,
-                    CreatedOn = pet.CreatedOn,
-                    ModifiedOn = pet.ModifiedOn,
-                    IsDeleted = pet.IsDeleted,
-                    DeletedOn = pet.DeletedOn
-                };
-
-                db.Pets.Add(entity);
-                db.SaveChanges();
-                pet.Id = entity.Id;
+                return this.Json(new[] { pet }.ToDataSourceResult(request, this.ModelState));
             }
 
-            return Json(new[] { pet }.ToDataSourceResult(request, ModelState));
+            var newPet = this.petsService.Add(pet.Name);
+            if (newPet == null)
+            {
+                return this.Json(new[] { pet }.ToDataSourceResult(request, this.ModelState));
+            }
+
+            var data = this.Mapper.Map<PetAdminViewModel>(newPet);
+            return this.Json(new[] { data }.ToDataSourceResult(request, this.ModelState));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Pets_Update([DataSourceRequest]DataSourceRequest request, Pet pet)
+        public ActionResult Pets_Update([DataSourceRequest]DataSourceRequest request, PetAdminViewModel pet)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                var entity = new Pet
-                {
-                    Id = pet.Id,
-                    Name = pet.Name,
-                    CreatedOn = pet.CreatedOn,
-                    ModifiedOn = pet.ModifiedOn,
-                    IsDeleted = pet.IsDeleted,
-                    DeletedOn = pet.DeletedOn
-                };
-
-                db.Pets.Attach(entity);
-                db.Entry(entity).State = EntityState.Modified;
-                db.SaveChanges();
+                this.petsService.Update(pet.Name, pet.IsDeleted, pet.Id);
             }
 
-            return Json(new[] { pet }.ToDataSourceResult(request, ModelState));
-        }
-
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Pets_Destroy([DataSourceRequest]DataSourceRequest request, Pet pet)
-        {
-            if (ModelState.IsValid)
-            {
-                var entity = new Pet
-                {
-                    Id = pet.Id,
-                    Name = pet.Name,
-                    CreatedOn = pet.CreatedOn,
-                    ModifiedOn = pet.ModifiedOn,
-                    IsDeleted = pet.IsDeleted,
-                    DeletedOn = pet.DeletedOn
-                };
-
-                db.Pets.Attach(entity);
-                db.Pets.Remove(entity);
-                db.SaveChanges();
-            }
-
-            return Json(new[] { pet }.ToDataSourceResult(request, ModelState));
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
+            var petById = this.petsService.ById(pet.Id, true);
+            var data = this.Mapper.Map<PetAdminViewModel>(petById);
+            return this.Json(new[] { data }.ToDataSourceResult(request, this.ModelState));
         }
     }
 }

@@ -368,6 +368,7 @@
     <Content Include="Areas\Private\Views\Users\MyComments.cshtml" />
     <Content Include="Areas\Private\Views\Shared\DisplayTemplates\CommentPrivateViewModel.cshtml" />
     <Content Include="Areas\Administration\Views\Pets\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\EditorTemplates\PetAdminViewModel.cshtml" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.0.js" />
     <Content Include="Scripts\jquery-2.2.0.min.js" />

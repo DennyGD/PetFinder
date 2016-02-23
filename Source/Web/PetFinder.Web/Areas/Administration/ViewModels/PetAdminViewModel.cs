@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace PetFinder.Web.Areas.Administration.ViewModels
+﻿namespace PetFinder.Web.Areas.Administration.ViewModels
 {
-    public class PetAdminViewModel : BaseAdminViewModel
+    using Data.Models;
+    using Infrastructure.Mapping;
+
+    public class PetAdminViewModel : BaseAdminViewModel, IMapFrom<Pet>
     {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
     }
 }
