@@ -1,9 +1,10 @@
 ﻿namespace PetFinder.Web.Controllers
 {
-    using Infrastructure.Mapping;
-    using Services.Data.Contracts;
     using System.Linq;
     using System.Web.Mvc;
+
+    using Infrastructure.Mapping;
+    using Services.Data.Contracts;
     using ViewModels.Posts;
 
     public class HomeController : BaseController
@@ -21,9 +22,9 @@
             return this.View();
         }
 
-        // TODO refactor
+        [HttpGet]
         [ChildActionOnly]
-        //[OutputCache(Duration = 2 * 60)]
+        [OutputCache(Duration = 2 * 60)]
         public ActionResult LastLostPosts()
         {
             var data = this.postsService
@@ -34,8 +35,9 @@
             return this.PartialView("_PostBaseListPartial", data);
         }
 
+        [HttpGet]
         [ChildActionOnly]
-        //[OutputCache(Duration = 2 * 60)]
+        [OutputCache(Duration = 2 * 60)]
         public ActionResult LastFoundPets()
         {
             var data = this.postsService

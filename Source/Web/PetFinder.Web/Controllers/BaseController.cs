@@ -5,6 +5,7 @@
     using Infrastructure.Mapping;
     using PetFinder.Services.Web;
 
+    [HandleError]
     public abstract class BaseController : Controller
     {
         public ICacheService Cache { get; set; }

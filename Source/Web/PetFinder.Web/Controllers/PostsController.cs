@@ -72,6 +72,7 @@
 
             if (postById == null)
             {
+                this.TempData[Others.TempDataForError] = "Публикацията не е намерена.";
                 return this.RedirectToAction("Index", "Home");
             }
 
