@@ -25,3 +25,6 @@ The requirements for the project could be seen [here](https://github.com/Telerik
 
 * Admin panel
  ![Admin](Screenshots/admin-panel.png)
+
+#### Remarks
+The application's basic functionality is done but there's still room for improvements and more functionalities should be added. Also, code quality could be improved.
