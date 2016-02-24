@@ -1,0 +1,29 @@
+﻿@model PetFinder.Web.Areas.Administration.ViewModels.PostAdminViewModel
+
+@Html.ValidationSummary(true, string.Empty, new { @class = "text-danger" })
+<div class="form-group">
+    @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.EditorFor(m => m.Title, new { @class = "form-control" })
+    </div>
+    <div class="col-md-10">
+        @Html.ValidationMessageFor(m => m.Title, string.Empty, new { @class = "text-danger" })
+    </div>
+</div>
+<br />
+<div class="form-group">
+    @Html.LabelFor(m => m.Content, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.EditorFor(m => m.Content, new { @class = "form-control" })
+    </div>
+    <div class="col-md-10">
+        @Html.ValidationMessageFor(m => m.Content, string.Empty, new { @class = "text-danger" })
+    </div>
+</div>
+<br />
+<div class="form-group">
+    @Html.LabelFor(m => m.IsDeleted, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.EditorFor(m => m.IsDeleted, new { @class = "form-control" })
+    </div>
+</div>

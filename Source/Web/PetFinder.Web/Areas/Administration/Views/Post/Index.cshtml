@@ -1,0 +1,50 @@
+﻿@using Kendo.Mvc.UI;
+
+@section stylesInHead {
+    @Styles.Render("~/Content/kendo")
+}
+
+@section scriptsInHead {
+    @Scripts.Render("~/bundles/kendo")
+}
+
+<h1 class="text-primary">Admin panel for the posts</h1>
+<br />
+
+@(Html.Kendo().Grid<PetFinder.Web.Areas.Administration.ViewModels.PostAdminViewModel>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.Id).Width(40);
+          columns.Bound(c => c.Title);
+          columns.Bound(c => c.Content);
+          columns.Bound(c => c.EventTime);
+          columns.Bound(c => c.IsSolved).Width(120);
+          columns.Bound(c => c.CreatedOn).Width(120);
+          columns.Bound(c => c.ModifiedOn).Width(120);
+          columns.Bound(c => c.IsDeleted).Width(120);
+          columns.Bound(c => c.DeletedOn).Width(100);
+          columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
+      })
+      .ColumnMenu()
+      .Editable(editable => editable.Mode(GridEditMode.PopUp))
+      .Pageable()
+      .Navigatable()
+      .Sortable(sortable => {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Filterable()
+      .Scrollable(x => x.Height("auto"))
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model => model.Id(p => p.Id))
+          .Read(read => read.Action("Posts_Read", "Post"))
+          .Update(update => update.Action("Posts_Update", "Post"))
+          .Destroy(destroy => destroy.Action("Posts_Destroy", "Post"))
+      )
+)
+
+@section scripts {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

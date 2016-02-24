@@ -206,10 +206,12 @@
     <Compile Include="Areas\Administration\Controllers\BaseAdminController.cs" />
     <Compile Include="Areas\Administration\Controllers\CommentsController.cs" />
     <Compile Include="Areas\Administration\Controllers\PetsController.cs" />
+    <Compile Include="Areas\Administration\Controllers\PostController.cs" />
     <Compile Include="Areas\Administration\Controllers\UsersController.cs" />
     <Compile Include="Areas\Administration\ViewModels\BaseAdminViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\CommentAdminViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\PetAdminViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\PostAdminViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\UserAdminViewModel.cs" />
     <Compile Include="Areas\Private\Controllers\BasePrivateController.cs" />
     <Compile Include="Areas\Private\Controllers\UsersController.cs" />
@@ -372,6 +374,8 @@
     <Content Include="Areas\Private\Views\Shared\DisplayTemplates\CommentPrivateViewModel.cshtml" />
     <Content Include="Areas\Administration\Views\Pets\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\EditorTemplates\PetAdminViewModel.cshtml" />
+    <Content Include="Areas\Administration\Views\Post\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\EditorTemplates\PostAdminViewModel.cshtml" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.0.js" />
     <Content Include="Scripts\jquery-2.2.0.min.js" />
@@ -442,6 +446,7 @@
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Comments\" />
     <Folder Include="Views\Pets\" />
+    <Folder Include="Views\Post\" />
     <Folder Include="Views\Users\" />
   </ItemGroup>
   <ItemGroup>

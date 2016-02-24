@@ -18,15 +18,11 @@
         private const int MaxFileSizeInKiloBytes = 120000;
 
         private readonly IDbRepository<Post> postsRepo;
-
         private readonly IDbRepository<Image> imagesRepo;
-
+        private readonly IDbRepository<Comment> commentsRepo;
         private readonly IRegionsService regionsService;
-
         private readonly IPostCategoriesService postCategoriesService;
-
         private readonly IPetsService petsService;
-
         private readonly IUsersService usersService;
 
         private List<string> allowedFileExtensions = new List<string>() { "jpg", "jpeg", "png" };
@@ -34,6 +30,7 @@
         public PostsService(
             IDbRepository<Post> postsRepo,
             IDbRepository<Image> imagesRepo,
+            IDbRepository<Comment> commentsRepo,
             IRegionsService regionsService, 
             IPostCategoriesService postCategoriesService, 
             IPetsService petsService, 
@@ -41,6 +38,7 @@
         {
             this.postsRepo = postsRepo;
             this.imagesRepo = imagesRepo;
+            this.commentsRepo = commentsRepo;
             this.regionsService = regionsService;
             this.postCategoriesService = postCategoriesService;
             this.petsService = petsService;
@@ -59,6 +57,18 @@
                 .Where(x => (x.PostCategory.Name.ToLower() == category.ToLower()) && !x.IsSolved)
                 .OrderByDescending(x => x.CreatedOn)
                 .Take(count);
+        }
+
+        public IQueryable<Post> All(bool includeDeleted)
+        {
+            if (includeDeleted)
+            {
+                return this.postsRepo.AllWithDeleted();
+            }
+            else
+            {
+                return this.postsRepo.All();
+            }
         }
 
         public IQueryable<Post> All(bool isSolved, string category = "")
@@ -197,6 +207,54 @@
             }
         }
 
+        public void Update(string title, string content, bool isDeleted, int id)
+        {
+            if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(content))
+            {
+                return;
+            }
+
+            var postToUpdate = this.postsRepo.AllWithDeleted().Where(x => x.Id == id).FirstOrDefault();
+            if (postToUpdate == null)
+            {
+                return;
+            }
+
+            postToUpdate.Title = title;
+            postToUpdate.Content = content;
+            if (postToUpdate.IsDeleted != isDeleted)
+            {
+                this.HandleChangesInIsDeletedStatus(postToUpdate, isDeleted);
+            }
+
+            try
+            {
+                this.postsRepo.Save();
+            }
+            catch (Exception)
+            {
+                // log
+            }
+        }
+
+        public void HardDelete(int id)
+        {
+            var postToDelete = this.postsRepo.AllWithDeleted().Where(x => x.Id == id).FirstOrDefault();
+            if (postToDelete == null)
+            {
+                return;
+            }
+
+            foreach (var comment in postToDelete.Comments)
+            {
+                this.commentsRepo.HardDelete(comment);
+            }
+
+            this.commentsRepo.Save();
+            this.postsRepo.HardDelete(postToDelete);
+            this.postsRepo.Save();
+        }
+
         private Image GetImage(HttpPostedFileBase file)
         {
             if (file == null)
@@ -223,6 +281,40 @@
             }
 
             return image;
+        }
+
+        private void HandleChangesInIsDeletedStatus(Post post, bool isDeleted)
+        {
+            if (isDeleted == true)
+            {
+                this.DeleteComments(post);
+                this.postsRepo.Delete(post);
+            }
+            else
+            {
+                this.UndoDeleteComments(post);
+                post.IsDeleted = false;
+            }
+        }
+
+        private void DeleteComments(Post post)
+        {
+            foreach (var comment in post.Comments)
+            {
+                this.commentsRepo.Delete(comment);
+            }
+
+            this.commentsRepo.Save();
+        }
+
+        private void UndoDeleteComments(Post post)
+        {
+            foreach (var comment in post.Comments)
+            {
+                comment.IsDeleted = false;
+            }
+
+            this.commentsRepo.Save();
         }
     }
 }

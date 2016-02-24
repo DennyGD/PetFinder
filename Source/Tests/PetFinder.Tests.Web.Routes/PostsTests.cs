@@ -39,6 +39,17 @@
         }
 
         [TestMethod]
+        public void PostsDetailsWithSomeIdAndTitleShouldBeMapped()
+        {
+            int id = 1;
+            string title = "some-title";
+
+            this.routes
+                .ShouldMap($"/{ControllerName}/Details/{id}/{title}")
+                .To<PostsController>(x => x.Details(id));
+        }
+
+        [TestMethod]
         public void PostsAddShouldBeMapped()
         {
             this.routes
