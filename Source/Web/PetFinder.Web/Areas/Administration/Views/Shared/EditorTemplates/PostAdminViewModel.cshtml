@@ -6,9 +6,11 @@
     <div class="col-md-10">
         @Html.EditorFor(m => m.Title, new { @class = "form-control" })
     </div>
-    <div class="col-md-10">
-        @Html.ValidationMessageFor(m => m.Title, string.Empty, new { @class = "text-danger" })
-    </div>
+    <div class="row">
+        <div class="col-md-10">
+            @Html.ValidationMessageFor(m => m.Title, string.Empty, new { @class = "text-danger" })
+        </div>
+    </div> 
 </div>
 <br />
 <div class="form-group">
@@ -16,9 +18,11 @@
     <div class="col-md-10">
         @Html.EditorFor(m => m.Content, new { @class = "form-control" })
     </div>
-    <div class="col-md-10">
-        @Html.ValidationMessageFor(m => m.Content, string.Empty, new { @class = "text-danger" })
-    </div>
+    <div class="row">
+        <div class="col-md-10">
+            @Html.ValidationMessageFor(m => m.Content, string.Empty, new { @class = "text-danger" })
+        </div>
+    </div> 
 </div>
 <br />
 <div class="form-group">

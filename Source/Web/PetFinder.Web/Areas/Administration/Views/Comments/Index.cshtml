@@ -39,3 +39,8 @@
           .Destroy(destroy => destroy.Action("Comments_Destroy", "Comments"))
       )
 )
+
+@section scripts {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -42,3 +42,8 @@
           .Update(update => update.Action("Pets_Update", "Pets"))
       )
 )
+
+@section scripts {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

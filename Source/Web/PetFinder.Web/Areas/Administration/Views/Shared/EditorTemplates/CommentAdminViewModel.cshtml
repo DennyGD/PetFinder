@@ -1,11 +1,16 @@
 ﻿@model PetFinder.Web.Areas.Administration.ViewModels.CommentAdminViewModel
 
-@Html.ValidationSummary(false, string.Empty, new { @class = "text-danger" })
+@Html.ValidationSummary(true, string.Empty, new { @class = "text-danger" })
 <div class="form-group">
     @Html.LabelFor(m => m.Content, new { @class = "col-md-2 control-label" })
     <div class="col-md-10">
         @Html.EditorFor(m => m.Content, new { @class = "form-control" })
     </div>
+    <div class="row">
+        <div class="col-md-10">
+            @Html.ValidationMessageFor(m => m.Content, string.Empty, new { @class = "text-danger" })
+        </div>
+    </div>    
 </div>
 <br />
 <div class="form-group">
