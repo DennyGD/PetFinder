@@ -1,13 +1,13 @@
 ﻿namespace PetFinder.Web.ViewModels.Posts
 {
-    using System.Collections.Generic;
+    using System.Linq;
 
     using AutoMapper;
-    using Comments;
+
     using Data.Models;
-    using Infrastructure.Mapping;
     using Images;
-    using System.Linq;    // TODO must add more info
+    using Infrastructure.Mapping;
+
     public class PostExtendedViewModel : IMapFrom<Post>, IHaveCustomMappings
     {
         public int Id { get; set; }

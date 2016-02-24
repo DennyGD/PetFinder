@@ -5,14 +5,15 @@
     using System.Linq;
     using System.Web.Mvc;
 
-    using Services.Data.Contracts;
-    using ViewModels.Posts;
-    using ViewModels.Comments;
     using Infrastructure.Mapping;
-    using PetFinder.Common.Constants;
-    using ViewModels.Shared;
-    using Services.Web;
     using Microsoft.AspNet.Identity;
+    using PetFinder.Common.Constants;
+    using Services.Data.Contracts;
+    using Services.Web;
+    using ViewModels.Comments;
+    using ViewModels.Posts;
+    using ViewModels.Shared;
+
     public class PostsController : BaseController
     {
         private const int DefaultPageSize = 5;
@@ -26,8 +27,6 @@
         private readonly IPostCategoriesService postCategoriesService;
 
         private readonly IPetsService petsService;
-
-        public IDropdownListService Dropdown { get; set; }
 
         public PostsController(
             IPostsService postsService, 
@@ -43,6 +42,8 @@
             this.postCategoriesService = postCategoriesService;
             this.petsService = petsService;
         }
+
+        public IDropdownListService Dropdown { get; set; }
 
         [HttpGet]
         public ActionResult All(int id = 1)
@@ -125,7 +126,8 @@
         public ActionResult Regions(bool toUseForAddition, string name, string selected = null)
         {
             var allRegions = this.Cache
-                .Get("allRegions",
+                .Get(
+                "allRegions",
                 () => this.regionsService.All(false).ToList(),
                 30 * 60);
 
@@ -148,7 +150,8 @@
         public ActionResult PostCategories(string name)
         {
             var allPostCategories = this.Cache
-                .Get("allPostCategories",
+                .Get(
+                "allPostCategories",
                 () => this.postCategoriesService.All(false).ToList(),
                 30 * 60);
 
@@ -163,7 +166,8 @@
         public ActionResult Pets(string name)
         {
             var allPets = this.Cache
-                .Get("allPets",
+                .Get(
+                "allPets",
                 () => this.petsService.All(false).ToList(),
                 30 * 60);
 

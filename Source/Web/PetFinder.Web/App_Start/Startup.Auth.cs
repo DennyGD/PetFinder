@@ -7,10 +7,10 @@
     using Microsoft.Owin;
     using Microsoft.Owin.Security.Cookies;
 
+    using Owin;
+
     using PetFinder.Data;
     using PetFinder.Data.Models;
-
-    using Owin;
 
     public partial class Startup
     {

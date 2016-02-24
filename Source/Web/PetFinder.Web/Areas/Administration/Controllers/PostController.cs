@@ -1,20 +1,15 @@
 ﻿namespace PetFinder.Web.Areas.Administration.Controllers
 {
-    using System;
-    using System.Collections.Generic;
     using System.Data;
-    using System.Data.Entity;
     using System.Linq;
-    using System.Net;
-    using System.Web;
     using System.Web.Mvc;
+
+    using Infrastructure.Mapping;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
-    using PetFinder.Data.Models;
-    using PetFinder.Data;
     using Services.Data.Contracts;
-    using Infrastructure.Mapping;
     using ViewModels;
+
     public class PostController : BaseAdminController
     {
         private readonly IPostsService postsService;

@@ -1,5 +1,6 @@
 ﻿namespace PetFinder.Web.Controllers
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web;
@@ -11,7 +12,7 @@
 
     using PetFinder.Data.Models;
     using PetFinder.Web.ViewModels.Account;
-    using System;
+
     [Authorize]
     public class AccountController : BaseController
     {

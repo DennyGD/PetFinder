@@ -1,7 +1,7 @@
-﻿using System.Web.Mvc;
-
-namespace PetFinder.Web.Areas.Administration
+﻿namespace PetFinder.Web.Areas.Administration
 {
+    using System.Web.Mvc;
+
     public class AdministrationAreaRegistration : AreaRegistration 
     {
         public override string AreaName 
@@ -18,8 +18,7 @@ namespace PetFinder.Web.Areas.Administration
                 "Administration_default",
                 "Administration/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional },
-                new[] { "PetFinder.Web.Areas.Administration.Controllers" }
-            );
+                new[] { "PetFinder.Web.Areas.Administration.Controllers" });
         }
     }
 }

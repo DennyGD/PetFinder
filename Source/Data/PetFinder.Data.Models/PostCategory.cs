@@ -16,7 +16,6 @@
         }
 
         [Required]
-       // [Index(IsUnique = true)]
         public string Name { get; set; }
 
         public virtual ICollection<Post> Posts

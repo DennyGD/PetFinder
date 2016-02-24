@@ -45,16 +45,5 @@
             var data = this.Mapper.Map<UserAdminViewModel>(userById);
             return this.Json(new[] { data }.ToDataSourceResult(request, this.ModelState));
         }
-
-        // [AcceptVerbs(HttpVerbs.Post)]
-        // public ActionResult Users_Destroy([DataSourceRequest]DataSourceRequest request, UserAdminViewModel user)
-        // {
-        //     if (!string.IsNullOrWhiteSpace(user?.Id))
-        //     {
-        //         this.usersService.Delete(user.Id, false);
-        //     }
-           
-        //     return Json(new[] { user }.ToDataSourceResult(request, ModelState));
-        // }
     }
 }

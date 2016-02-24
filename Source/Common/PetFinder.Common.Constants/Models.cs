@@ -1,6 +1,5 @@
 ﻿namespace PetFinder.Common.Constants
 {
-
     public class Models
     {
         public const int FirstNameMaxLength = 20;

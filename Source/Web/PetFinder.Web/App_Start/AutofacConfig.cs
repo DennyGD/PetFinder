@@ -8,12 +8,10 @@
     using Autofac.Integration.Mvc;
 
     using Controllers;
-
     using Data;
     using Data.Common;
-
-    using Services.Web;
     using Services.Data.Contracts;
+    using Services.Web;
 
     public static class AutofacConfig
     {

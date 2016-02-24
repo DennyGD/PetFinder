@@ -1,20 +1,17 @@
 ﻿namespace PetFinder.Data.Migrations
 {
-    using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
-    using PetFinder.Common.Constants;
-    using PetFinder.Common.Helpers;
-    using Models;
-    using System.Data.Entity;
-    using System.Data.Entity.Validation;
     using System.IO;
     using System.Reflection;
+
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+
+    using Models;
+    using PetFinder.Common.Constants;
+    using PetFinder.Common.Helpers;
+
     public class DataSeed
     {
         private const string DefaultPassword = "123456";
@@ -23,8 +20,13 @@
 
         private const string DefaultImageFileExtension = "jpg";
 
+        private static Random rand = new Random();
+
+        private readonly AppDbContext context;
+
         private IList<string> regions = new List<string>()
-        {   "Благоевград",
+        {
+            "Благоевград",
             "Бургас",
             "Варна",
             "Велико Търново",
@@ -53,10 +55,6 @@
             "Ямбол"
         };
 
-        private static Random rand = new Random();
-
-        private readonly AppDbContext context;
-
         public DataSeed(AppDbContext context)
         {
             this.context = context;
@@ -76,15 +74,6 @@
         {
             var userManager = new UserManager<User>(new UserStore<User>(this.context));
 
-            //userManager.PasswordValidator = new PasswordValidator
-            //{
-            //    RequiredLength = 6,
-            //    RequireNonLetterOrDigit = false,
-            //    RequireDigit = false,
-            //    RequireLowercase = false,
-            //    RequireUppercase = false,
-            //};
-
             var user = new User()
             {
                 Email = "admin@admin.com",
@@ -101,15 +90,6 @@
         public void SeedUsers()
         {
             var userManager = new UserManager<User>(new UserStore<User>(this.context));
-
-            //userManager.PasswordValidator = new PasswordValidator
-            //{
-            //    RequiredLength = 6,
-            //    RequireNonLetterOrDigit = false,
-            //    RequireDigit = false,
-            //    RequireLowercase = false,
-            //    RequireUppercase = false,
-            //};
 
             for (int i = 0; i < 5; i++)
             {
@@ -136,7 +116,6 @@
             }
 
             this.context.SaveChanges();
-            //SaveChanges(this.context);
         }
 
         public void SeedPostCategories()
@@ -145,7 +124,6 @@
             this.context.PostCategories.Add(new PostCategory() { Name = "Намерени" });
             this.context.PostCategories.Add(new PostCategory() { Name = "Други" });
             this.context.SaveChanges();
-            //SaveChanges(this.context);
         }
 
         public void SeedPets()
@@ -154,7 +132,6 @@
             this.context.Pets.Add(new Pet() { Name = "Котки" });
             this.context.Pets.Add(new Pet() { Name = "Други" });
             this.context.SaveChanges();
-            //SaveChanges(this.context);
         }
 
         public void SeedPostsWithComments(List<User> users, List<PostCategory> categories, List<Pet> pets, List<Region> regions)
@@ -188,9 +165,7 @@
                 this.context.Posts.Add(post);
             }
 
-            this.context.SaveChanges();
-            
-            //SaveChanges(this.context);
+            this.context.SaveChanges();            
         }
 
         public void SeedImages(List<Post> posts)

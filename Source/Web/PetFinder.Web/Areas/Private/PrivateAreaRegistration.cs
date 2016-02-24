@@ -18,8 +18,7 @@
                 "Private_default",
                 "Private/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional },
-                new[] { "PetFinder.Web.Areas.Private.Controllers" }
-            );
+                new[] { "PetFinder.Web.Areas.Private.Controllers" });
         }
     }
 }

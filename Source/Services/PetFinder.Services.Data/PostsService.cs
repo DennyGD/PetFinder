@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Web;
@@ -10,7 +11,7 @@
     using PetFinder.Common.Constants;
     using PetFinder.Data.Common;
     using PetFinder.Data.Models;
-    using System.IO;
+
     public class PostsService : IPostsService
     {
         private const int FilesMaxCount = 3;

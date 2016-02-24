@@ -4,11 +4,6 @@
 
     using PetFinder.Data.Common.Models;
 
-    //public interface IDbRepository<T> : IDbRepository<T>
-    //    where T : class, IDeletableEntity
-    //{
-    //}
-
     public interface IDbRepository<T>
         where T : class, IDeletableEntity, IAuditInfo
     {
