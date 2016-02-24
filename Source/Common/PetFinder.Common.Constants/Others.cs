@@ -17,5 +17,7 @@
         public const string DropdownPartialName = "_DropdownPartial";
 
         public const string PostBaseListPartial = "_PostBaseListPartial";
+
+        public const string CommentsListPartial = "_CommentsListPartial";
     }
 }

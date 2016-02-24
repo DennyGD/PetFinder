@@ -3,6 +3,7 @@
     using System.Linq;
     using System.Web.Mvc;
 
+    using Common.Constants;
     using Infrastructure.Filters;
     using Infrastructure.Mapping;
 
@@ -29,7 +30,7 @@
                 .To<CommentViewModel>()
                 .ToList();
 
-            return this.PartialView("_CommentsListPartial", data);
+            return this.PartialView(Others.CommentsListPartial, data);
         }
 
         [HttpPost]
@@ -37,7 +38,7 @@
         [ValidateAntiForgeryToken]
         public ActionResult Add(CommentInputModel comment)
         {
-            if (!this.User.Identity.IsAuthenticated)
+            if (this.User == null || !this.User.Identity.IsAuthenticated)
             {
                 this.Response.StatusCode = 401;
                 return this.Content("Unauthorized");

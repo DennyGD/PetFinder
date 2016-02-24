@@ -87,6 +87,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CommentsControllerTests.cs" />
+    <Compile Include="ErrorsControllerTests.cs" />
     <Compile Include="HomeControllerTests.cs" />
     <Compile Include="Mocks\MocksFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

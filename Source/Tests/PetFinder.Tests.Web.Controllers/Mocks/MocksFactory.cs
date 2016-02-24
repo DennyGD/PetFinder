@@ -9,6 +9,7 @@
     using Moq;
     using Services.Data.Contracts;
     using Data.Models;
+    using System.Web;
     public static class MocksFactory
     {
         //public static ICategoriesService GetCategoriesService()
@@ -31,6 +32,28 @@
                 .Returns(new List<Post>().AsQueryable());
 
             return postsService.Object;
+        }
+
+        public static ICommentsService GetCommentsService()
+        {
+            var commentsService = new Mock<ICommentsService>();
+
+            commentsService.Setup(x => x.AllByPostId(It.IsAny<int>(), It.IsAny<int>()))
+                .Returns(new List<Comment>().AsQueryable());
+
+            return commentsService.Object;
+        }
+
+        public static HttpContextBase GetHttpContext()
+        {
+            var httpContext = new Mock<HttpContextBase>();
+            var response = new Mock<HttpResponseBase>();
+
+            httpContext
+                .SetupGet(x => x.Response)
+                .Returns(response.Object);
+
+            return httpContext.Object;
         }
     }
 }
