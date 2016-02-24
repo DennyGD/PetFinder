@@ -34,7 +34,7 @@
             var solvedCases = this.Cache
                 .Get(
                 "solvedCases",
-                () => this.postsService.All(true).ToList().Count,
+                () => this.postsService.All(true, string.Empty).ToList().Count,
                 30 * 60);
 
             var data = new StatsViewModel { LostPets = lostPetsCount, FoundPets = foundPetsCount, SolvedCases = solvedCases };
